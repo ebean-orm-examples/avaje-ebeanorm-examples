@@ -19,12 +19,11 @@
 		</encoder>
 	</appender>
 
-	<root level="WARN">
+	<root level="TRACE">
 		<appender-ref ref="APPLICATION" />
 		<appender-ref ref="STDOUT" />
 	</root>
 
-    <logger name="nz.co.visaentertainment" level="DEBUG" />
 	<logger name="org.avaje" level="INFO" />
 	<logger name="com.avaje" level="INFO" />
 	<logger name="org.avaje.ebean.SQL" level="TRACE" />

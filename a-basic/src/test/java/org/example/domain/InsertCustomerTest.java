@@ -1,6 +1,8 @@
 package org.example.domain;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.example.ExampleBaseTestCase;
 import org.junit.Test;
@@ -23,5 +25,17 @@ public class InsertCustomerTest extends ExampleBaseTestCase {
     
   }
   
+  
+  @Test
+  public void testQuery() {
+    
+    List<Customer> customers = 
+        Customer.find.
+          where().ilike("name", "rob%")
+          .findList();
+    
+    assertTrue(customers.isEmpty());
+    
+  }
   
 }
