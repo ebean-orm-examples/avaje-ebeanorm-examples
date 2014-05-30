@@ -12,16 +12,23 @@ import com.avaje.ebean.annotation.UpdatedTimestamp;
 
 /**
  * Base domain object with Id, version, whenCreated and whenUpdated.
+ * 
+ * <p>
+ * Extending Model to enable the 'active record' style.
+ * 
+ * <p>
+ * whenCreated and whenUpdated are generally useful for maintaining external search services (like
+ * elasticsearch) and audit.
  */
 @MappedSuperclass
-public class BaseModel extends Model {
+public abstract class BaseModel extends Model {
 
   @Id
   Long id;
-  
+
   @Version
   Long version;
-  
+
   @CreatedTimestamp
   Timestamp whenCreated;
 
@@ -59,6 +66,5 @@ public class BaseModel extends Model {
   public void setWhenUpdated(Timestamp whenUpdated) {
     this.whenUpdated = whenUpdated;
   }
-  
-  
+
 }

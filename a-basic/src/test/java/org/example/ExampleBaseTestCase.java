@@ -6,12 +6,12 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Use to dynamically load the avaje-ebeanorm-agent.
+ * Used to dynamically load the avaje-ebeanorm-agent.
  * 
  * Alternatives: 
- * - the IntelliJ or Eclipse plugins, 
- * - rely on maven/ant enhancement
- * - specify the java agent on the command line
+ * - Use IntelliJ or Eclipse plugins, 
+ * - Rely on maven/ant enhancement (pain in dev, test cycle)
+ * - Specify the java agent on the command line
  *
  */
 public class ExampleBaseTestCase {
@@ -20,7 +20,7 @@ public class ExampleBaseTestCase {
   
   static {
     logger.debug("... preStart");
-    if (!AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent","debug=1;packages=org.example.**,com.avaje.ebean.*")) {
+    if (!AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent","debug=1;packages=org.example.**")) {
       logger.info("avaje-ebeanorm-agent not found in classpath - not dynamically loaded");
     }    
   }

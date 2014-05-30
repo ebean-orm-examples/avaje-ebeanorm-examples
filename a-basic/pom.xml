@@ -5,14 +5,15 @@
   <artifactId>a-basic-example</artifactId>
   <version>1.0.1-SNAPSHOT</version>
   <name>a-basic-example</name>
-  <description>Example</description>
+  
+  <description>Introduction example using ebean.properties</description>
 
   <dependencies>
 
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>4.0.3-SNAPSHOT</version>
+      <version>4.0.4</version>
     </dependency>
 
     <dependency>
@@ -40,6 +41,13 @@
       <version>4.1.2</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.178</version>
+      <scope>test</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -62,13 +70,43 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.178</version>
-      <scope>test</scope>
-    </dependency>
-
   </dependencies>
 
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.avaje.ebeanorm</groupId>
+        <artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
+        <version>4.1.2</version>
+        <executions>
+           <execution>
+            <id>main</id>
+            <phase>process-classes</phase>
+            <configuration>
+              <classSource>target/classes</classSource>
+              <packages>org.example.domain.**</packages>
+              <transformArgs>debug=1</transformArgs>
+            </configuration>
+            <goals>
+              <goal>enhance</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+  
 </project>

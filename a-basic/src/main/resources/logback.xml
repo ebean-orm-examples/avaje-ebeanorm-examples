@@ -19,13 +19,17 @@
 		</encoder>
 	</appender>
 
-	<root level="TRACE">
+	<root level="INFO">
 		<appender-ref ref="APPLICATION" />
 		<appender-ref ref="STDOUT" />
 	</root>
 
 	<logger name="org.avaje" level="INFO" />
 	<logger name="com.avaje" level="INFO" />
+  
+  
+  <!-- Logging for SQL etc -->
+  
 	<logger name="org.avaje.ebean.SQL" level="TRACE" />
 	<logger name="org.avaje.ebean.TXN" level="TRACE" />
 	<logger name="org.avaje.ebean.SUM" level="TRACE" />
