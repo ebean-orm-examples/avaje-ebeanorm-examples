@@ -16,6 +16,16 @@
       <version>4.0.4</version>
     </dependency>
 
+    <!-- 
+      Optional but Ebean will read these annotations
+      like @size to determine column lengths etc
+     -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.0.0.GA</version>
+    </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -32,21 +42,18 @@
       <groupId>org.avaje</groupId>
       <artifactId>avaje-agentloader</artifactId>
       <version>1.1.1</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm-agent</artifactId>
       <version>4.1.2</version>
-      <scope>test</scope>
     </dependency>
     
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <version>1.4.178</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>

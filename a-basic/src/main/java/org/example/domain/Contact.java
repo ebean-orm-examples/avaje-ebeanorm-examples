@@ -32,6 +32,20 @@ public class Contact extends BaseModel {
   @ManyToOne(optional=false)
   Customer customer;
 
+  /**
+   * Default constructor.
+   */
+  public Contact() {
+  }
+  
+  /**
+   * Construct with a firstName and lastName.
+   */
+  public Contact(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  
   public String getFirstName() {
     return firstName;
   }
