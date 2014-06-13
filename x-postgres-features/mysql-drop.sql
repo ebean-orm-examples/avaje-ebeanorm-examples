@@ -1,0 +1,6 @@
+SET FOREIGN_KEY_CHECKS=0;
+
+drop table p_customer;
+
+SET FOREIGN_KEY_CHECKS=1;
+
