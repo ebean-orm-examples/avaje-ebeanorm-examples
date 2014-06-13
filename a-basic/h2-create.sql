@@ -1,3 +1,5 @@
+create schema oe;
+
 create table o_address (
   id                        bigint not null,
   line1                     varchar(100),
@@ -80,6 +82,20 @@ create table o_product (
   constraint pk_o_product primary key (id))
 ;
 
+create table oe.simp (
+  id                        bigint not null,
+  name                      varchar(255),
+  other_id                  bigint not null,
+  constraint uq_simp_name unique (name),
+  constraint pk_simp primary key (id))
+;
+
+create table oe.simpother (
+  id                        bigint not null,
+  name                      varchar(255),
+  constraint pk_simpother primary key (id))
+;
+
 create sequence o_address_seq;
 
 create sequence be_contact_seq;
@@ -93,6 +109,10 @@ create sequence o_order_seq;
 create sequence o_order_detail_seq;
 
 create sequence o_product_seq;
+
+create sequence oe.simp_seq;
+
+create sequence oe.simpother_seq;
 
 alter table o_address add constraint fk_o_address_country_1 foreign key (country_code) references o_country (code) on delete restrict on update restrict;
 create index ix_o_address_country_1 on o_address (country_code);
@@ -110,5 +130,7 @@ alter table o_order_detail add constraint fk_o_order_detail_order_7 foreign key 
 create index ix_o_order_detail_order_7 on o_order_detail (order_id);
 alter table o_order_detail add constraint fk_o_order_detail_product_8 foreign key (product_id) references o_product (id) on delete restrict on update restrict;
 create index ix_o_order_detail_product_8 on o_order_detail (product_id);
+alter table oe.simp add constraint oe.fk_simp_other_9 foreign key (other_id) references oe.simpother (id) on delete restrict on update restrict;
+create index oe.ix_simp_other_9 on oe.simp (other_id);
 
 
