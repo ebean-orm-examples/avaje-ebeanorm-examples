@@ -1,0 +1,4 @@
+moduleName = GroovyEbeanExtensions
+moduleVersion = 1.1
+extensionClasses = org.avaje.ebean.groovy.EbeanExtensionModule
+staticExtensionClasses = org.avaje.ebean.groovy.StaticEbeanExtensionModule
