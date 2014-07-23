@@ -13,7 +13,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>4.0.5-SNAPSHOT</version>
+      <version>[4.0,)</version>
     </dependency>
 
     <!-- 
