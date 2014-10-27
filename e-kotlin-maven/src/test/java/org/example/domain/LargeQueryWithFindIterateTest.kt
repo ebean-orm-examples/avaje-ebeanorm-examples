@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
-  protected var logger: Logger = LoggerFactory.getLogger(javaClass<ExampleBaseTestCase>())
-
-  // How to do a static initialisation block? (to load the javaagent at runtime)
+  // How to best do a class static initialisation block? (to load the javaagent at runtime so I'd say its a rare requirement)
   class object {
-    val agentLoaded = AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=4;packages=org.example.**");
+    // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
+    val agentLoaded = AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
   }
 
   Test
@@ -34,6 +33,8 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
       .select("id, name")
       .findVisit(FindVisit())
 
+    // Perform the query using findIterate ... which means the
+    // iterator MUST be closed (in the finally block below)
     val iterate =
         Customer.find
           .query().select("id, name")
@@ -57,6 +58,7 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
 
   class FindVisit : QueryResultVisitor<Customer> {
+
     override fun accept(customer: Customer?): Boolean {
       System.out.println("vistor ... got name ${customer?.id} ${customer?.name}");
       return true;
