@@ -6,6 +6,18 @@ import javax.validation.constraints.Size;
 import com.avaje.ebean.Model.Finder
 
 /**
+ * Create using a name and sku.
+ * <p>
+ * Provided as alternate constructor.
+ */
+fun Product(name:String , sku:String) : Product {
+  val product = Product()
+  product.name = name
+  product.sku = sku
+  return product;
+}
+
+/**
  * Product entity bean.
  */
 Entity

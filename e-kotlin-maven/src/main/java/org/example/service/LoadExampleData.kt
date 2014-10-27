@@ -27,111 +27,70 @@ public class LoadExampleData {
       return;
     }
 
-    server.beginTransaction();
-    try {
+    server.execute({
       deleteAll();
       insertCountries();
       insertProducts();
       insertTestCustAndOrders();
-
-      server.commitTransaction();
-    } finally {
-      server.endTransaction();
-    }
-//    server.execute(TxRunnable() {
-//      fun run() {
-//        deleteAll();
-//        insertCountries();
-//        insertProducts();
-//        insertTestCustAndOrders();
-//      }
-//    });
+    });
     runOnce = true;
   }
 
   fun deleteAll() {
-//    Ebean.execute(TxRunnable() {
-//      fun run() {
 
-        // Ebean.currentTransaction().setBatchMode(false);
+    // using an 'extension function'
+    txn({
 
-        // orm update use bean name and bean properties
-        // server.createUpdate(OrderShipment.class, "delete from orderShipment").execute();
+      // orm update use bean name and bean properties
+      server.createUpdate(javaClass<OrderDetail>(), "delete from orderDetail").execute();
+      server.createUpdate((javaClass<Order>()), "delete from order").execute();
+      server.createUpdate((javaClass<Contact>()), "delete from contact").execute();
+      server.createUpdate((javaClass<Customer>()), "delete from Customer").execute();
+      server.createUpdate((javaClass<Address>()), "delete from address").execute();
 
-        server.createUpdate(javaClass<OrderDetail>(), "delete from orderDetail").execute();
-        server.createUpdate((javaClass<Order>()), "delete from order").execute();
-        server.createUpdate((javaClass<Contact>()), "delete from contact").execute();
-        server.createUpdate((javaClass<Customer>()), "delete from Customer").execute();
-        server.createUpdate((javaClass<Address>()), "delete from address").execute();
-
-        // sql update uses table and column names
-        server.createSqlUpdate("delete from o_country").execute();
-        server.createSqlUpdate("delete from o_product").execute();
-
-//      }
-//    });
+      // sql update uses table and column names
+      server.createSqlUpdate("delete from o_country").execute();
+      server.createSqlUpdate("delete from o_product").execute();
+    })
   }
 
   fun insertCountries() {
 
-//    server.execute(TxRunnable() {
-//      fun run() {
-        val nz = Country();
-        nz.code = "NZ";
-        nz.name = "New Zealand";
-        server.save(nz);
-
-        val au = Country()
-        au.code = "AU"
-        au.name = "Australia"
-        server.save(au);
-//      }
-//    });
+    Country("NZ", "New Zealand 22").save()
+    Country("AU", "Australia 22").save()
   }
 
   fun insertProducts() {
 
-//    server.execute(TxRunnable() {
-//      fun run() {
-        var product = Product();
-        product.name = "Chair";
-        product.sku = "C001";
-        server.save(product);
+    server.execute({
 
-        product = Product();
-        product.name = "Desk";
-        product.sku = "DSK1";
-        server.save(product);
+      // use alternate constructor function ...
+      Product("Chair", "C001").save()
+      Product("Desk", "DSK1").save()
+      Product("C002", "Computer").save()
 
-        product = Product();
-        product.name = "Computer";
-        product.sku = "C002";
-        server.save(product);
-
-        product = Product();
-        product.name = "Printer";
-        product.sku = "C003";
-        server.save(product);
-//      }
-//    });
+      // use set properties style ...
+      val product = Product()
+      product.name = "Printer"
+      product.sku = "C003"
+      product.save()
+    });
   }
 
   fun insertTestCustAndOrders() {
 
-//    // How to do this better in Kotlin ??
-//    Ebean.execute(TxRunnable() {
-//      fun run() {
-        val cust1 = insertCustomer("Rob");
-        val cust2 = insertCustomerNoAddress();
-        insertCustomerFiona();
-        insertCustomerNoContacts("NocCust");
+    // TxRunnable is not really required ...
+    server.execute(TxRunnable() {
+      val cust1 = insertCustomer("Rob");
+      val cust2 = insertCustomerNoAddress();
+      insertCustomerFiona();
+      insertCustomerNoContacts("NocCust");
 
-        createOrder1(cust1);
-        createOrder2(cust2);
-        createOrder3(cust1);
-        createOrder4(cust1);
-//      }
-//    });
+      createOrder1(cust1);
+      createOrder2(cust2);
+      createOrder3(cust1);
+      createOrder4(cust1);
+    });
   }
 
   fun createCustAndOrder(custName: String): Customer {
@@ -151,12 +110,11 @@ public class LoadExampleData {
 
   fun insertCustomerFiona(): Customer {
 
-    val c = createCustomer("Fiona", "12 Apple St", "West Coast Rd", 1);
+    val c = createCustomer("Fiona", "12 Apple St", "West Coast Rd", 1)
+    c.addContact(createContact("Fiona", "Black"))
+    c.addContact(createContact("Tracy", "Red"))
 
-    c.addContact(createContact("Fiona", "Black"));
-    c.addContact(createContact("Tracy", "Red"));
-
-    Ebean.save(c);
+    c.save()
     return c;
   }
 
@@ -171,27 +129,27 @@ public class LoadExampleData {
 
   fun insertCustomerNoContacts(name: String): Customer {
 
-    val c = createCustomer("Roger", "15 Kumera Way", "Bos town", 1);
-    c.name = name;
+    val customer = createCustomer("Roger", "15 Kumera Way", "Bos town", 1);
+    customer.name = name;
 
-    c.save()
-    return c;
+    customer.save()
+    return customer;
   }
 
   fun insertCustomerNoAddress(): Customer {
 
-    val c = Customer();
-    c.name = "Cust NoAddress";
-    c.addContact(createContact("Jack", "Black"));
+    val customer = Customer();
+    customer.name = "Cust NoAddress";
+    customer.addContact(createContact("Jack", "Black"));
 
-    c.save()
-    return c;
+    customer.save()
+    return customer;
   }
 
   fun insertCustomer(name: String): Customer {
-    val c = createCustomer(name, "1 Banana St", "P.O.Box 1234", 1);
-    c.save()
-    return c;
+    val customer = createCustomer(name, "1 Banana St", "P.O.Box 1234", 1);
+    customer.save()
+    return customer;
   }
 
   fun createCustomer(name: String, shippingStreet: String?, billingStreet: String?, contactSuffix: Int): Customer {
@@ -233,26 +191,26 @@ public class LoadExampleData {
     val product2 = Product.ref(2)
     val product3 = Product.ref(3)
 
-    val order = Order();
-    order.customer = customer;
-    order.add(product1, 5, 10.50)
-    order.add(product2, 3, 1.10)
-    order.add(product3, 1, 2.00)
-
-    order.save()
-
-    return order;
+    return with(Order()) {
+      this.customer = customer;
+      add(product1, 5, 10.50)
+      add(product2, 3, 1.10)
+      add(product3, 1, 2.00)
+      save()
+      this
+    }
   }
 
   fun createOrder2(customer: Customer) {
 
     val product1 = Product.ref(1)
 
-    val order = Order();
-    order.status = Status.SHIPPED;
-    order.customer = customer;
-    order.add(product1, 4, 10.50)
-    order.save();
+    with(Order()) {
+      status = Status.SHIPPED;
+      this.customer = customer;
+      add(product1, 4, 10.50)
+      save();
+    }
   }
 
   fun createOrder3(customer: Customer) {
@@ -260,19 +218,20 @@ public class LoadExampleData {
     val product1 = Product.ref(1)
     val product3 = Product.ref(3)
 
-    val order = Order()
-    order.status = Status.COMPLETE
-    order.customer = customer;
-    order.add(product1, 3, 10.50)
-    order.add(product3, 40, 2.10)
-
-    order.save()
+    with(Order()) {
+      status = Status.COMPLETE
+      this.customer = customer;
+      add(product1, 3, 10.50)
+      add(product3, 40, 2.10)
+      save()
+    }
   }
 
   fun createOrder4(customer: Customer) {
 
-    val order = Order()
-    order.customer = customer
-    order.save()
+    with(Order()) {
+      this.customer = customer;
+      save();
+    }
   }
 }

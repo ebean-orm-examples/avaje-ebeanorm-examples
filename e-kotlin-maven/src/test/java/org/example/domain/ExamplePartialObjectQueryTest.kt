@@ -3,6 +3,7 @@ package org.example.domain;
 import com.avaje.ebean.Ebean;
 import org.example.ExampleBaseTestCase;
 import org.junit.Test;
+import org.example.service.LoadExampleData
 
 public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
 
@@ -20,12 +21,16 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
   Test
   fun automaticallyAddJoins() {
 
-    val country = Ebean.getReference(javaClass<Country>(), "NZ");
+    LoadExampleData().load()
+
+    val country = Country.ref("NZ") //Ebean.getReference(javaClass<Country>(), "NZ");
 
     val customer =
       Customer.find
         .select("name")
-        .where().eq("billingAddress.country", country)
+        .where()
+          .eq("name","Rob")
+          .eq("billingAddress.country", country)
         .findUnique();
 
     val customerName = customer.name;
