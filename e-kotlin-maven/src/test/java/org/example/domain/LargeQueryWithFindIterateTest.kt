@@ -8,6 +8,9 @@ import com.avaje.ebean.QueryIterator;
 import org.avaje.agentloader.AgentLoader
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import com.avaje.ebean.Ebean
+import com.avaje.ebean.TxCallable
+import com.avaje.ebean.TxRunnable
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
@@ -26,6 +29,25 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
       customer.name = "Hello"+i;
       customer.save();      
     }
+
+//      Ebean.execute(TxRunnable {
+//          fun run() {
+//              "hello"
+//          }
+//      });
+//
+//      Ebean.execute({
+//          "hello"
+//      });
+//
+//    val myResult = Ebean.execute(TxCallable<String> {
+//        fun call() : String {
+//            return "hello"
+//        }
+//    });
+//
+//    myResult?.length()
+
 
     // Can I convert this QueryResultVisitor to a SAM function?
     // Using local FindVisit class for the moment
