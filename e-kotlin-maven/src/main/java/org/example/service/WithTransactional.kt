@@ -5,18 +5,15 @@ import org.example.domain.Product
 import com.avaje.ebean.annotation.Transactional
 
 /**
- * Created by rob on 30/10/14.
+ * Uses @Transactional and byte code enhancement.
  */
-/**
- * Uses @Transactional
- */
-public class WithAtTransactional {
+public class WithTransactional {
 
     Transactional
     fun performInTransaction() {
 
         val custJim = Customer()
-        custJim.name = "InTransaction"
+        custJim.name = "ShouldNotFindMe"
         custJim.save()
 
         val prod = Product()

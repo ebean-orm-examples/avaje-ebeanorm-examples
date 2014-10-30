@@ -30,9 +30,9 @@ public class Contact : BaseModel() {
   public var customer: Customer? = null;
 
   /**
-   * Singleton finder and alternative constructors.
+   * Convenience finder singleton and alternative constructors.
    */
-  class object {
+  class object : LongIdFinder<Contact>(javaClass<Contact>()) {
 
     /**
      * Alternate constructor using Kotlin singleton.
@@ -43,11 +43,6 @@ public class Contact : BaseModel() {
       d.lastName = last;
       return d;
     }
-
-    /**
-     * Convenience Finder for 'active record' style.
-     */
-    public val find: Finder<String, Contact> = com.avaje.ebean.Model.Finder(javaClass<String>(), javaClass<Contact>());
 
   }
 }

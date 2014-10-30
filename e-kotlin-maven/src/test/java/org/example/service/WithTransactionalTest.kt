@@ -12,17 +12,17 @@ import kotlin.test.assertFalse
  */
 class WithTransactionalTest : ExampleBaseTestCase() {
 
-    Test fun just_run_it() {
+  Test fun just_run_it() {
 
-        val load = WithAtTransactional()
-        try {
-            load.performInTransaction()
-            assertFalse(true)
+    val load = WithTransactional()
+    try {
+      load.performInTransaction()
+      assertFalse(true)
 
-        } catch (e : RuntimeException) {
-            val cust = Customer.find.where().eq("name", "InTransaction").findUnique()
-            assertNull(cust)
-        }
-
+    } catch (e: RuntimeException) {
+      val customer : Customer? = Customer.find.where().eq("name", "ShouldNotFindMe").findUnique()
+      assertNull(customer)
     }
+
+  }
 }

@@ -24,23 +24,11 @@ public class Address : BaseModel() {
   ManyToOne(optional=false)
   public var country: Country? = null;
 
+  /**
+   * Find helper singleton.
+   */
+  class object : LongIdFinder<Address>(javaClass<Address>()) {}
+
 }
-//  /**
-//   * Create a copy of the address. Used to provide a 'snapshot' of
-//   * the shippingAddress for a give order.
-//   */
-//  public Address createCopy() {
-//    Address copy = new Address();
-//    copy.setLine1(line1);
-//    copy.setLine2(line2);
-//    copy.setCity(city);
-//    copy.setCountry(country);
-//    return copy;
-//  }
-
-//  public String toString() {
-//    return id + " " + line1 + " " + line2 + " " + city + " " + country;
-//  }
-
 
 

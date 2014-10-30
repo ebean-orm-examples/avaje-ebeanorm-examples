@@ -112,7 +112,7 @@
             <phase>process-classes</phase>
             <configuration>
               <classSource>target/classes</classSource>
-              <packages>org.example.domain.**</packages>
+              <packages>org.example.**</packages>
               <transformArgs>debug=1</transformArgs>
             </configuration>
             <goals>

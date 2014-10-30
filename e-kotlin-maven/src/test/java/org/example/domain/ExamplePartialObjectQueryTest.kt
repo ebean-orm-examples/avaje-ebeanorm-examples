@@ -23,7 +23,7 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
 
     LoadExampleData().load()
 
-    val country = Country.ref("NZ") //Ebean.getReference(javaClass<Country>(), "NZ");
+    val country = Country.ref("NZ")
 
     val customer =
       Customer.find

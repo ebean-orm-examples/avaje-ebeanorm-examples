@@ -22,10 +22,10 @@ Table(name = "o_country")
 public class Country (
 
     Id Size(max = 2)
-    public var code: String? = null,
+    public var code: String,
 
     Size(max = 60)
-    public var name: String? = null
+    public var name: String
 
 ) : Model() {
 
@@ -34,21 +34,9 @@ public class Country (
   }
 
 
-  class object {
-
-    /**
-     * Convenience Finder for building queries.
-     */
-    public val find: Finder<String, Country> = Finder(javaClass<String>(), javaClass<Country>());
-
-    /**
-     * Return a reference bean
-     *
-     * @param id the key for the country
-     */
-    public fun ref(id: String): Country {
-      return find.ref(id);
-    }
-  }
+  /**
+   * Find helper singleton.
+   */
+  class object : StringIdFinder<Country>(javaClass<Country>()) {}
 
 }

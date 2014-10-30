@@ -4,13 +4,10 @@ import com.avaje.ebean.QueryResultVisitor;
 import org.example.ExampleBaseTestCase;
 import org.junit.Test;
 
-import com.avaje.ebean.QueryIterator;
 import org.avaje.agentloader.AgentLoader
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import com.avaje.ebean.Ebean
-import com.avaje.ebean.TxCallable
-import com.avaje.ebean.TxRunnable
+import com.avaje.ebean.findEach
+import com.avaje.ebean.findEachWhile
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
@@ -24,39 +21,51 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
   fun testFindIterate() {
 
     // insert some customers
-    for (i in 0..30) {
-      val customer = Customer();
-      customer.name = "Hello"+i;
-      customer.save();      
+    Ebean.execute {
+      for (i in 0..10) {
+        val customer = Customer();
+        customer.name = "Hello" + i;
+        customer.save();
+      }
     }
 
-//      Ebean.execute(TxRunnable {
-//          fun run() {
-//              "hello"
-//          }
-//      });
-//
-//      Ebean.execute({
-//          "hello"
-//      });
-//
-//    val myResult = Ebean.execute(TxCallable<String> {
-//        fun call() : String {
-//            return "hello"
-//        }
-//    });
-//
-//    myResult?.length()
 
+    // The following queries show how to process very large resultSets a bean at a time.
+    // Internally Ebean uses a persistence context per per bean (and associated object graphs)
+    // unlike findList() which holds the entire list of beans in memory before giving the list
+    // to the caller for processing.
 
-    // Can I convert this QueryResultVisitor to a SAM function?
-    // Using local FindVisit class for the moment
     Customer.find
-      .select("id, name")
-      .findVisit(FindVisit())
+        .select("id, name")
+        .findVisit {
+          System.out.println(" using findVisit ... ${it.id} ${it.name}")
+          // stop iterating/processing when ... id > 2
+          (it.id ?: 0) > 2;
+        }
 
-    // Perform the query using findIterate ... which means the
-    // iterator MUST be closed (in the finally block below)
+    Customer.find
+        .select("id, name")
+        .where()
+        .findEach({
+          val id = it?.id
+          val name = it?.name
+          System.out.println(" using findEach extension method - $id $name")
+        })
+
+    Customer.find
+        .select("id, name")
+        .where()
+        .findEachWhile {
+          System.out.println(" using findEachThat extension method ... ${it.id} ${it.name}")
+          // stop iterating through the results if id > 5
+          (it.id ?: 0) > 5;
+        }
+
+
+    // Perform the query using findIterate (Java7 style) ...
+    // Note that the iterator MUST be closed (in the finally block below) or there
+    // will be leaked jdbc resources
+
     val iterate =
         Customer.find
           .query().select("id, name")
@@ -76,15 +85,6 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
       iterate.close();
     }
 
-  }
-
-
-  class FindVisit : QueryResultVisitor<Customer> {
-
-    override fun accept(customer: Customer?): Boolean {
-      System.out.println("vistor ... got name ${customer?.id} ${customer?.name}");
-      return true;
-    }
   }
 
 }

@@ -1,6 +1,8 @@
 package org.example.service
 
 import com.avaje.ebean.Ebean
+import com.avaje.ebean.ExpressionList
+import com.avaje.ebean.QueryIterator
 
 /**
  * Execute function in a transaction with transaction required semantics.

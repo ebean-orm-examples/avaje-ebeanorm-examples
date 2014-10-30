@@ -11,7 +11,10 @@ Entity
 Table(name = "o_order_detail")
 public class OrderDetail : BaseModel() {
 
-  class object {
+  /**
+   * Find helper singleton.
+   */
+  class object: LongIdFinder<Order>(javaClass<Order>()) {
 
     /**
      * A constructor method - hmmm.

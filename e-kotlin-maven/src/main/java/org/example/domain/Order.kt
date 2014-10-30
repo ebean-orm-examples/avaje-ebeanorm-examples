@@ -18,6 +18,11 @@ Entity
 Table(name = "o_order")
 public class Order : BaseModel() {
 
+  /**
+   * Find helper singleton.
+   */
+  class object: LongIdFinder<Order>(javaClass<Order>()) {}
+
   enum class Status {
     NEW
     APPROVED
@@ -40,10 +45,6 @@ public class Order : BaseModel() {
   OneToMany(mappedBy="order", cascade=array(CascadeType.PERSIST))
   OrderBy("id asc")
   public var details: MutableList<OrderDetail> = ArrayList();
-
-//  public String toString() {
-//    return id + " status:" + status + " customer:" + customer;
-//  }
   
 
   /**
@@ -57,11 +58,11 @@ public class Order : BaseModel() {
   /**
    * Add an order detail.
    */
-  fun add(p:Product, orderQty: Int, unitPrice: Double) : OrderDetail {
-    val d = OrderDetail();
-    d.order = this
-    d.set(p, orderQty, unitPrice);
-    return d;
+  fun add(product:Product, orderQty: Int, unitPrice: Double) : OrderDetail {
+    val detail = OrderDetail();
+    detail.order = this
+    detail.set(product, orderQty, unitPrice);
+    return detail;
   }
 
   /**
