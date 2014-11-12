@@ -1,16 +1,14 @@
 package org.example;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
+import com.avaje.ebean.Ebean;
 import org.example.domain.Customer;
 import org.example.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.avaje.ebean.Ebean;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
