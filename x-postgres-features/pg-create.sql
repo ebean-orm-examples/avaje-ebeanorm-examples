@@ -11,5 +11,11 @@ create table p_customer (
   constraint pk_p_customer primary key (id))
 ;
 
+create table p_user (
+  user_id                   bigserial not null,
+  name                      varchar(255),
+  constraint pk_p_user primary key (user_id))
+;
+
 
 

@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "o_order")
 public class Order extends BaseModel {
 
+  public static final Finder<Long,Order> find = new Finder<>(Long.class, Order.class);
+
   public enum Status {
     NEW, APPROVED, SHIPPED, COMPLETE
   }

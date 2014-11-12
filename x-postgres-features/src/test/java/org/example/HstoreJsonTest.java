@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import com.avaje.ebean.text.json.JsonContext;
 public class HstoreJsonTest extends ExampleBaseTestCase {
 
   @Test
-  public void test() {
+  public void test() throws IOException {
     
     
     Customer customer = new Customer();
@@ -23,9 +24,10 @@ public class HstoreJsonTest extends ExampleBaseTestCase {
     
     customer.setTags(tags);
     
-    JsonContext jsonContext = Customer.db().createJsonContext();
-    String jsonString = jsonContext.toJsonString(customer);
+    JsonContext jsonContext = Customer.db().json();
+    String jsonString = jsonContext.toJson(customer);
     System.out.println(jsonString);
-    
+
+
   }
 }

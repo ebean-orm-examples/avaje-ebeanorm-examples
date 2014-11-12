@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.example</groupId>
+  <artifactId>example-json-features</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <name>example-json-features</name>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm</artifactId>
+      <version>4.0.5-SNAPSHOT</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>io.fastjson</groupId>
+      <artifactId>boon</artifactId>
+      <version>0.21</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+ 
+<!-- 
+  
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+-->
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.0.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+
+</project>

@@ -1,5 +1,3 @@
-create schema oe;
-
 create table o_address (
   id                        bigint not null,
   line1                     varchar(100),
@@ -23,6 +21,17 @@ create table be_contact (
   when_created              timestamp not null,
   when_updated              timestamp not null,
   constraint pk_be_contact primary key (id))
+;
+
+create table contact_note (
+  id                        bigint not null,
+  contact_id                bigint not null,
+  title                     varchar(255),
+  note                      clob,
+  version                   bigint not null,
+  when_created              timestamp not null,
+  when_updated              timestamp not null,
+  constraint pk_contact_note primary key (id))
 ;
 
 create table o_country (
@@ -82,23 +91,11 @@ create table o_product (
   constraint pk_o_product primary key (id))
 ;
 
-create table oe.simp (
-  id                        bigint not null,
-  name                      varchar(255),
-  other_id                  bigint not null,
-  constraint uq_simp_name unique (name),
-  constraint pk_simp primary key (id))
-;
-
-create table oe.simpother (
-  id                        bigint not null,
-  name                      varchar(255),
-  constraint pk_simpother primary key (id))
-;
-
 create sequence o_address_seq;
 
 create sequence be_contact_seq;
+
+create sequence contact_note_seq;
 
 create sequence o_country_seq;
 
@@ -110,27 +107,23 @@ create sequence o_order_detail_seq;
 
 create sequence o_product_seq;
 
-create sequence oe.simp_seq;
-
-create sequence oe.simpother_seq;
-
 alter table o_address add constraint fk_o_address_country_1 foreign key (country_code) references o_country (code) on delete restrict on update restrict;
 create index ix_o_address_country_1 on o_address (country_code);
 alter table be_contact add constraint fk_be_contact_customer_2 foreign key (customer_id) references be_customer (id) on delete restrict on update restrict;
 create index ix_be_contact_customer_2 on be_contact (customer_id);
-alter table be_customer add constraint fk_be_customer_billingAddress_3 foreign key (billing_address_id) references o_address (id) on delete restrict on update restrict;
-create index ix_be_customer_billingAddress_3 on be_customer (billing_address_id);
-alter table be_customer add constraint fk_be_customer_shippingAddress_4 foreign key (shipping_address_id) references o_address (id) on delete restrict on update restrict;
-create index ix_be_customer_shippingAddress_4 on be_customer (shipping_address_id);
-alter table o_order add constraint fk_o_order_customer_5 foreign key (customer_id) references be_customer (id) on delete restrict on update restrict;
-create index ix_o_order_customer_5 on o_order (customer_id);
-alter table o_order add constraint fk_o_order_shippingAddress_6 foreign key (shipping_address_id) references o_address (id) on delete restrict on update restrict;
-create index ix_o_order_shippingAddress_6 on o_order (shipping_address_id);
-alter table o_order_detail add constraint fk_o_order_detail_order_7 foreign key (order_id) references o_order (id) on delete restrict on update restrict;
-create index ix_o_order_detail_order_7 on o_order_detail (order_id);
-alter table o_order_detail add constraint fk_o_order_detail_product_8 foreign key (product_id) references o_product (id) on delete restrict on update restrict;
-create index ix_o_order_detail_product_8 on o_order_detail (product_id);
-alter table oe.simp add constraint oe.fk_simp_other_9 foreign key (other_id) references oe.simpother (id) on delete restrict on update restrict;
-create index oe.ix_simp_other_9 on oe.simp (other_id);
+alter table contact_note add constraint fk_contact_note_contact_3 foreign key (contact_id) references be_contact (id) on delete restrict on update restrict;
+create index ix_contact_note_contact_3 on contact_note (contact_id);
+alter table be_customer add constraint fk_be_customer_billingAddress_4 foreign key (billing_address_id) references o_address (id) on delete restrict on update restrict;
+create index ix_be_customer_billingAddress_4 on be_customer (billing_address_id);
+alter table be_customer add constraint fk_be_customer_shippingAddress_5 foreign key (shipping_address_id) references o_address (id) on delete restrict on update restrict;
+create index ix_be_customer_shippingAddress_5 on be_customer (shipping_address_id);
+alter table o_order add constraint fk_o_order_customer_6 foreign key (customer_id) references be_customer (id) on delete restrict on update restrict;
+create index ix_o_order_customer_6 on o_order (customer_id);
+alter table o_order add constraint fk_o_order_shippingAddress_7 foreign key (shipping_address_id) references o_address (id) on delete restrict on update restrict;
+create index ix_o_order_shippingAddress_7 on o_order (shipping_address_id);
+alter table o_order_detail add constraint fk_o_order_detail_order_8 foreign key (order_id) references o_order (id) on delete restrict on update restrict;
+create index ix_o_order_detail_order_8 on o_order_detail (order_id);
+alter table o_order_detail add constraint fk_o_order_detail_product_9 foreign key (product_id) references o_product (id) on delete restrict on update restrict;
+create index ix_o_order_detail_product_9 on o_order_detail (product_id);
 
 

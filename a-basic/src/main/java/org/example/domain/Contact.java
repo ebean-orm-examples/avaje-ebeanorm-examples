@@ -1,9 +1,7 @@
 package org.example.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Contact entity bean.
@@ -31,6 +29,9 @@ public class Contact extends BaseModel {
   
   @ManyToOne(optional=false)
   Customer customer;
+
+  @OneToMany(mappedBy = "contact")
+  List<ContactNote> notes;
 
   /**
    * Default constructor.
@@ -85,5 +86,12 @@ public class Contact extends BaseModel {
   public void setCustomer(Customer customer) {
     this.customer = customer;
   }
-  
+
+  public List<ContactNote> getNotes() {
+    return notes;
+  }
+
+  public void setNotes(List<ContactNote> notes) {
+    this.notes = notes;
+  }
 }
