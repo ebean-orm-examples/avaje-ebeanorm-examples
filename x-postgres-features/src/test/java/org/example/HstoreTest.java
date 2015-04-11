@@ -11,6 +11,10 @@ import org.junit.Test;
 
 /**
  * Test the use of HStore being mapped to a Map<String,String> value.
+ *
+ * You need to first install the hstore extension:
+ *
+ * psql mydb -c 'create extension hstore;'
  */
 public class HstoreTest extends ExampleBaseTestCase {
 
