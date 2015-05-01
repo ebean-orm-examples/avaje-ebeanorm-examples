@@ -37,6 +37,6 @@ public class Country (
   /**
    * Find helper singleton.
    */
-  class object : StringIdFinder<Country>(javaClass<Country>()) {}
+  companion object : Model.Find<String,Country>() {}
 
 }

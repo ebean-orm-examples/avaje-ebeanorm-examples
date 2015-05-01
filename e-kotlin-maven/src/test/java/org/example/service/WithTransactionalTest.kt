@@ -20,7 +20,7 @@ class WithTransactionalTest : ExampleBaseTestCase() {
       assertFalse(true)
 
     } catch (e: RuntimeException) {
-      val customer : Customer? = Customer.find.where().eq("name", "ShouldNotFindMe").findUnique()
+      val customer : Customer? = Customer.where().eq("name", "ShouldNotFindMe").findUnique()
       assertNull(customer)
     }
 

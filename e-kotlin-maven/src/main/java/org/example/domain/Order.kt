@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import com.avaje.ebean.Model
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -18,10 +19,7 @@ Entity
 Table(name = "o_order")
 public class Order : BaseModel() {
 
-  /**
-   * Find helper singleton.
-   */
-  class object: LongIdFinder<Order>(javaClass<Order>()) {}
+  companion object: Model.Find<Long, Order>(){}
 
   enum class Status {
     NEW

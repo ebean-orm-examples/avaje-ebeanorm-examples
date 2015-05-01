@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import com.avaje.ebean.Model
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class Customer : BaseModel() {
   /**
    * Find helper singleton.
    */
-  class object: LongIdFinder<Customer>(javaClass<Customer>()) {}
+  companion object: Model.Find<Long,Customer>() {}
 
   public var inactive:Boolean = false;
   
@@ -45,10 +46,11 @@ public class Customer : BaseModel() {
   override public fun toString() : String {
     return "customer(id:$id name:$name)";
   }
+
   /**
    * Helper method to add a contact to the customer.
    */
-  fun addContact(contact:Contact) {
+  fun addContact(contact: Contact) {
 
     // setting the customer is automatically done when Ebean does
     // a cascade save from customer to contacts. 

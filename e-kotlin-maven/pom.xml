@@ -9,7 +9,7 @@
   <description>Example using Ebean in Kotlin via Maven plugin</description>
 
   <properties>
-    <kotlin.version>0.9.206</kotlin.version>
+    <kotlin.version>0.11.91.4</kotlin.version>
   </properties>
 
   <dependencies>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>[4.1.8,)</version>
+      <version>4.5.7-SNAPSHOT</version>
     </dependency>
 
     <!-- 

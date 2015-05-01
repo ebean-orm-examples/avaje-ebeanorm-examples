@@ -1,9 +1,9 @@
 package org.example.domain;
 
+import com.avaje.ebean.Model
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import com.avaje.ebean.Model.Finder
 
 
 /**
@@ -16,6 +16,7 @@ public class Product (
  Size(max = 20)
  public var sku: String? = null,
 
+ Size(max = 100)
  public var name: String? = null
 
 ) : BaseModel() {
@@ -23,6 +24,6 @@ public class Product (
   /**
    * Finder convenience singleton.
    */
-  class object : LongIdFinder<Product>(javaClass<Product>()) {}
+  companion object : Model.Find<Long, Product>() {}
 
 }

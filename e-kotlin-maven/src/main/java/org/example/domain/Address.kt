@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import com.avaje.ebean.Model
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,7 +28,7 @@ public class Address : BaseModel() {
   /**
    * Find helper singleton.
    */
-  class object : LongIdFinder<Address>(javaClass<Address>()) {}
+  companion object : Model.Find<Long,Address>() {}
 
 }
 

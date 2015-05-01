@@ -24,7 +24,7 @@ class SimpleTest {
 
     // Immutable ... subList, iterator etc
     val someStrings = listOf("one", "two");
-    val subList = someStrings.subList(0, 1);
+    someStrings.subList(0, 1);
 
     val it = someStrings.iterator();
     while (it.hasNext()) {

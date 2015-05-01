@@ -1,20 +1,16 @@
 package org.example.domain;
 
-import com.avaje.ebean.QueryResultVisitor;
-import org.example.ExampleBaseTestCase;
-import org.junit.Test;
-
-import org.avaje.agentloader.AgentLoader
 import com.avaje.ebean.Ebean
-import com.avaje.ebean.findEach
-import com.avaje.ebean.findEachWhile
+import org.avaje.agentloader.AgentLoader
+import org.example.ExampleBaseTestCase
+import org.junit.Test
+import kotlin.platform.platformStatic
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
-  // How to best do a class static initialisation block? (to load the javaagent at runtime so I'd say its a rare requirement)
-  class object {
+  platformStatic init {
     // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
-    val agentLoaded = AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
+    AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
   }
 
   Test
@@ -35,30 +31,21 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
     // unlike findList() which holds the entire list of beans in memory before giving the list
     // to the caller for processing.
 
-    Customer.find
-        .select("id, name")
-        .findVisit {
-          System.out.println(" using findVisit ... ${it.id} ${it.name}")
-          // stop iterating/processing when ... id > 2
-          (it.id ?: 0) > 2;
-        }
 
-    Customer.find
+    Customer
         .select("id, name")
         .where()
         .findEach({
-          val id = it?.id
-          val name = it?.name
-          System.out.println(" using findEach extension method - $id $name")
+          System.out.println(" using findEach - $it.id $it.name")
         })
 
-    Customer.find
+    Customer
         .select("id, name")
         .where()
         .findEachWhile {
-          System.out.println(" using findEachThat extension method ... ${it.id} ${it.name}")
+          System.out.println(" using findEachWhile  ${it.id} ${it.name}")
           // stop iterating through the results if id > 5
-          (it.id ?: 0) > 5;
+          (it.id ?: 0) < 5;
         }
 
 
@@ -67,8 +54,8 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
     // will be leaked jdbc resources
 
     val iterate =
-        Customer.find
-          .query().select("id, name")
+        Customer
+          .select("id, name")
           .findIterate();
 
     try {

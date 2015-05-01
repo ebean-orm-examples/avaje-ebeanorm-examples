@@ -11,7 +11,7 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
   fun test() {
 
     val customer =
-       Customer.find.select("name, email")
+       Customer.select("name, email")
             .where().idEq(12)
             .findUnique();
 
@@ -26,7 +26,7 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
     val country = Country.ref("NZ")
 
     val customer =
-      Customer.find
+      Customer
         .select("name")
         .where()
           .eq("name","Rob")

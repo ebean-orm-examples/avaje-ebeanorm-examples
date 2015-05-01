@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import com.avaje.ebean.Model
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,7 +15,7 @@ public class OrderDetail : BaseModel() {
   /**
    * Find helper singleton.
    */
-  class object: LongIdFinder<Order>(javaClass<Order>()) {
+  companion object: Model.Find<Long, Order>() {
 
     /**
      * A constructor method - hmmm.
