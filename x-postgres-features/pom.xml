@@ -15,6 +15,12 @@
       <version>(4.5,)</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.3</version>
+    </dependency>
+
     <!-- 
       Optional but Ebean will read these annotations
       like @size to determine column lengths etc

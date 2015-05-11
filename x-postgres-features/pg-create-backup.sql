@@ -11,10 +11,11 @@ create table p_customer (
   constraint pk_p_customer primary key (id))
 ;
 
+drop table p_doc;
 create table p_doc (
   id                        bigserial not null,
   name                      varchar(255),
-  content                   varchar(255),
+  content                   json,
   version                   bigint not null,
   constraint pk_p_doc primary key (id))
 ;
@@ -27,3 +28,4 @@ create table p_user (
 
 
 
+select * from p_doc;
