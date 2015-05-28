@@ -3,7 +3,7 @@ package org.example;
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.domain.SimpleDoc;
+import org.example.domain.SimpleDocUsingJsonNode;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class SimpleDocTest extends ExampleBaseTestCase {
+public class SimpleDocWithJsonNodeTest extends ExampleBaseTestCase {
 
   @Test
   public void test() throws IOException {
@@ -22,23 +22,23 @@ public class SimpleDocTest extends ExampleBaseTestCase {
 
     JsonNode jsonNode = mapper.readTree(rawJson);
 
-    SimpleDoc doc = new SimpleDoc();
+    SimpleDocUsingJsonNode doc = new SimpleDocUsingJsonNode();
     doc.setName("doc1");
     doc.setContent(jsonNode);
 
-    Ebean.save(doc);
+    doc.save();
 
 
     String fullJson = Ebean.json().toJson(doc);
 
-    SimpleDoc doc2 = Ebean.json().toBean(SimpleDoc.class, fullJson);
+    SimpleDocUsingJsonNode doc2 = Ebean.json().toBean(SimpleDocUsingJsonNode.class, fullJson);
 
     assertEquals(doc.getId(), doc2.getId());
     assertEquals(doc.getName(), doc2.getName());
     assertEquals(doc.getVersion(), doc2.getVersion());
     assertEquals(doc.getContent().toString(), doc2.getContent().toString());
 
-    SimpleDoc doc3 = Ebean.find(SimpleDoc.class, doc.getId());
+    SimpleDocUsingJsonNode doc3 = Ebean.find(SimpleDocUsingJsonNode.class, doc.getId());
     assertEquals(doc.getId(), doc3.getId());
     assertEquals(doc.getName(), doc3.getName());
     assertEquals(doc.getVersion(), doc3.getVersion());
@@ -50,7 +50,7 @@ public class SimpleDocTest extends ExampleBaseTestCase {
   public void testNullValue() throws IOException {
 
 
-    SimpleDoc doc = new SimpleDoc();
+    SimpleDocUsingJsonNode doc = new SimpleDocUsingJsonNode();
     doc.setName("doc1");
 
     Ebean.save(doc);
@@ -58,7 +58,7 @@ public class SimpleDocTest extends ExampleBaseTestCase {
 
     String fullJson = Ebean.json().toJson(doc);
 
-    SimpleDoc doc2 = Ebean.json().toBean(SimpleDoc.class, fullJson);
+    SimpleDocUsingJsonNode doc2 = Ebean.json().toBean(SimpleDocUsingJsonNode.class, fullJson);
 
     assertEquals(doc.getId(), doc2.getId());
     assertEquals(doc.getName(), doc2.getName());
@@ -66,7 +66,7 @@ public class SimpleDocTest extends ExampleBaseTestCase {
     assertNull(doc2.getContent());
 
 
-    SimpleDoc doc3 = Ebean.find(SimpleDoc.class, doc.getId());
+    SimpleDocUsingJsonNode doc3 = SimpleDocUsingJsonNode.find.byId(doc.getId());
     assertEquals(doc.getId(), doc3.getId());
     assertEquals(doc.getName(), doc3.getName());
     assertEquals(doc.getVersion(), doc3.getVersion());

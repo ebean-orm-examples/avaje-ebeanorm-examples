@@ -14,7 +14,7 @@ create table p_customer (
 create table p_doc (
   id                        bigserial not null,
   name                      varchar(255),
-  content                   varchar(255),
+  content                   jsonb,
   version                   bigint not null,
   constraint pk_p_doc primary key (id))
 ;

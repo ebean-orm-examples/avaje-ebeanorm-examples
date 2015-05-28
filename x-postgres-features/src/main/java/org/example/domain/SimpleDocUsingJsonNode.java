@@ -2,20 +2,19 @@ package org.example.domain;
 
 import com.avaje.ebean.Model;
 import com.avaje.ebean.annotation.DbJsonB;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import java.util.Map;
 
-//import com.fasterxml.jackson.databind.JsonNode;
 
 @Entity
-@Table(name="p_doc")
-public class SimpleDoc extends Model {
+@Table(name = "p_doc_jsonnode")
+public class SimpleDocUsingJsonNode extends Model {
 
-  public static Find<Long,SimpleDoc> find = new Find<Long,SimpleDoc>(){};
+  public static Find<Long, SimpleDocUsingJsonNode> find = new Find<Long, SimpleDocUsingJsonNode>(){};
 
   @Id
   Long id;
@@ -26,8 +25,7 @@ public class SimpleDoc extends Model {
   String name;
 
   @DbJsonB
-  //@DbJson(storage = DbJsonType.JSONB)
-  Map<String,Object> content;
+  JsonNode content;
 
   public Long getId() {
     return id;
@@ -53,11 +51,11 @@ public class SimpleDoc extends Model {
     this.name = name;
   }
 
-  public Map<String,Object> getContent() {
+  public JsonNode getContent() {
     return content;
   }
 
-  public void setContent(Map<String,Object> content) {
+  public void setContent(JsonNode content) {
     this.content = content;
   }
 }
