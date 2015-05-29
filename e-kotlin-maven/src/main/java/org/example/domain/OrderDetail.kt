@@ -4,6 +4,7 @@ import com.avaje.ebean.Model
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull
 
 /**
  * Order Detail entity bean.
@@ -12,9 +13,6 @@ Entity
 Table(name = "o_order_detail")
 public class OrderDetail : BaseModel() {
 
-  /**
-   * Find helper singleton.
-   */
   companion object: Model.Find<Long, Order>() {
 
     /**
@@ -30,6 +28,7 @@ public class OrderDetail : BaseModel() {
   /**
    * The owning order - should be not null really.
    */
+  NotNull
   ManyToOne
   public var order: Order? = null;
 
@@ -39,6 +38,7 @@ public class OrderDetail : BaseModel() {
 
   public var unitPrice: Double? = null;
 
+  NotNull
   ManyToOne
   public var product: Product? = null;
 

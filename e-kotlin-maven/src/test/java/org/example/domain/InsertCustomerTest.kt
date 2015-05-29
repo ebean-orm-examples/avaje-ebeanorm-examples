@@ -15,8 +15,8 @@ public class InsertCustomerTest : ExampleBaseTestCase() {
   Test
   fun test() {
 
-    val customer = Customer();
-    customer.name = "Roberto";
+    val customer = Customer("Roberto")
+    //customer.name = "Roberto"
     customer.comments = "Say hello"
 
     // insert the customer
@@ -24,14 +24,11 @@ public class InsertCustomerTest : ExampleBaseTestCase() {
 
     val fetched = Customer.byId(customer.id);
 
-    Customer.ref(123)
-
     // fetch using the Ebean singleton style
     val fetched2 = Ebean.find(javaClass<Customer>(), customer.id);
 
     assertEquals("Roberto", fetched.name);
     assertEquals("Roberto", fetched2.name);
-
   }
 
 
@@ -100,16 +97,16 @@ public class InsertCustomerTest : ExampleBaseTestCase() {
   }
 
 
-  Test
-  fun testQuery() {
+    Test
+    fun testQuery() {
 
-    val customers = Customer.where().ilike("name", "rob%").findList();
+        val customers =
+            Customer.
+              where().ilike("name", "rob%")
+              .findList();
 
-    for (customer in customers) {
-      customer.name
+        assertNotNull(customers);
+
     }
-    assertNotNull(customers);
-
-  }
 
 }

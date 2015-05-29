@@ -17,12 +17,9 @@ import com.avaje.ebean.Model.Finder
  */
 Entity
 Table(name="be_customer")
-public class Customer : BaseModel() {
+public class Customer() : BaseModel() {
 
-  /**
-   * Find helper singleton.
-   */
-  companion object: Model.Find<Long,Customer>() {}
+  companion object: Model.Find<Long, Customer>() {}
 
   public var inactive:Boolean = false;
   
@@ -43,6 +40,10 @@ public class Customer : BaseModel() {
   OneToMany(mappedBy="customer", cascade=array(CascadeType.PERSIST))
   public var contacts: MutableList<Contact> = ArrayList();
 
+  constructor (name: String) : this() {
+    this.name = name;
+  }
+
   override public fun toString() : String {
     return "customer(id:$id name:$name)";
   }
@@ -50,7 +51,7 @@ public class Customer : BaseModel() {
   /**
    * Helper method to add a contact to the customer.
    */
-  fun addContact(contact: Contact) {
+  fun addContact(contact:Contact) {
 
     // setting the customer is automatically done when Ebean does
     // a cascade save from customer to contacts. 

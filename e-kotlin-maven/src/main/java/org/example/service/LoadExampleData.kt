@@ -14,13 +14,15 @@ import org.example.domain.Product;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.TxRunnable;
+import java.util.Collections
+import java.util.LinkedHashSet
 
 public class LoadExampleData {
 
   var runOnce: Boolean = false;
 
   val server: EbeanServer = Ebean.getServer(null);
-
+    
   synchronized fun load() {
 
     if (runOnce) {
@@ -39,7 +41,7 @@ public class LoadExampleData {
   fun deleteAll() {
 
     // using an 'extension function'
-    txn({
+    Ebean.execute({
 
       // orm update use bean name and bean properties
       server.createUpdate(javaClass<OrderDetail>(), "delete from orderDetail").execute();

@@ -33,7 +33,6 @@ public class Country (
     return "code: $code name: $name";
   }
 
-
   /**
    * Find helper singleton.
    */

@@ -12,7 +12,7 @@ import com.avaje.ebean.Model.Finder
  */
 Entity
 Table(name = "be_contact")
-public class Contact : BaseModel() {
+public class Contact() : BaseModel() {
 
 
   Column(length = 50)
@@ -31,18 +31,20 @@ public class Contact : BaseModel() {
   public var customer: Customer? = null;
 
   /**
-   * Convenience finder singleton and alternative constructors.
+   * Construct with firstName and lastName.
    */
-  companion object : Model.Find<Long,Contact>() {
+  constructor(firstName:String, lastName:String) : this() {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  companion object : Model.Find<Long, Contact>() {
 
     /**
-     * Alternate constructor using Kotlin singleton.
+     * Alternate to secondary constructor ...
      */
     fun of(first: String, last: String): Contact {
-      val d = Contact();
-      d.firstName = first;
-      d.lastName = last;
-      return d;
+      return Contact(first, last);
     }
 
   }

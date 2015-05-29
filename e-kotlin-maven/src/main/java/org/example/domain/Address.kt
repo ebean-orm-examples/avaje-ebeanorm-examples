@@ -25,10 +25,7 @@ public class Address : BaseModel() {
   ManyToOne(optional=false)
   public var country: Country? = null;
 
-  /**
-   * Find helper singleton.
-   */
-  companion object : Model.Find<Long,Address>() {}
+  companion object : Model.Find<Long, Address>() {}
 
 }
 

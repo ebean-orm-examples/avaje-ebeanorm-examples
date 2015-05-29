@@ -1,17 +1,19 @@
 package org.example.domain;
 
-import com.avaje.ebean.Ebean
+import com.avaje.ebean.QueryResultVisitor;
+import org.example.ExampleBaseTestCase;
+import org.junit.Test;
+
 import org.avaje.agentloader.AgentLoader
-import org.example.ExampleBaseTestCase
-import org.junit.Test
+import com.avaje.ebean.Ebean
 import kotlin.platform.platformStatic
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
-  platformStatic init {
-    // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
-    AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
-  }
+    platformStatic init {
+        // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
+        AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
+    }
 
   Test
   fun testFindIterate() {
@@ -31,21 +33,22 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
     // unlike findList() which holds the entire list of beans in memory before giving the list
     // to the caller for processing.
 
-
     Customer
         .select("id, name")
         .where()
         .findEach({
-          System.out.println(" using findEach - $it.id $it.name")
+          val id = it?.id
+          val name = it?.name
+          System.out.println(" using findEach extension method - $id $name")
         })
 
     Customer
         .select("id, name")
         .where()
         .findEachWhile {
-          System.out.println(" using findEachWhile  ${it.id} ${it.name}")
+          System.out.println(" using findEachThat extension method ... ${it.id} ${it.name}")
           // stop iterating through the results if id > 5
-          (it.id ?: 0) < 5;
+          (it.id ?: 0) > 5;
         }
 
 
@@ -55,7 +58,7 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
     val iterate =
         Customer
-          .select("id, name")
+          .query().select("id, name")
           .findIterate();
 
     try {
