@@ -9,7 +9,7 @@
   <description>Example using Ebean in Kotlin via Maven plugin</description>
 
   <properties>
-    <kotlin.version>0.11.91.4</kotlin.version>
+    <kotlin.version>0.12.213</kotlin.version>
   </properties>
 
   <dependencies>

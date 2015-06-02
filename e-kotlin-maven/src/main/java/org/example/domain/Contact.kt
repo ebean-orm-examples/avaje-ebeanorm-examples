@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.avaje.ebean.Model.Finder
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * Contact entity bean.
@@ -15,18 +17,19 @@ Table(name = "be_contact")
 public class Contact() : BaseModel() {
 
 
-  Column(length = 50)
+  Size(max=50)
   public var firstName: String? = null;
 
-  Column(length = 50)
+  Size(max=50)
   public var lastName: String? = null;
 
-  Column(length = 200)
+  Size(max=200)
   public var email: String? = null;
 
-  Column(length = 20)
+  Size(max=20)
   public var phone: String? = null;
 
+  NotNull
   ManyToOne(optional = false)
   public var customer: Customer? = null;
 

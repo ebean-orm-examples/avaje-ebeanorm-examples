@@ -31,13 +31,13 @@ public class Customer() : BaseModel() {
   Column(length=1000)
   public var comments: String? = null;
   
-  ManyToOne(cascade=array(CascadeType.ALL))
+  ManyToOne(cascade=arrayOf(CascadeType.ALL))
   public var billingAddress: Address? = null;
 
-  ManyToOne(cascade=array(CascadeType.ALL))
+  ManyToOne(cascade=arrayOf(CascadeType.ALL))
   public var shippingAddress: Address? = null;
 
-  OneToMany(mappedBy="customer", cascade=array(CascadeType.PERSIST))
+  OneToMany(mappedBy="customer", cascade=arrayOf(CascadeType.PERSIST))
   public var contacts: MutableList<Contact> = ArrayList();
 
   constructor (name: String) : this() {

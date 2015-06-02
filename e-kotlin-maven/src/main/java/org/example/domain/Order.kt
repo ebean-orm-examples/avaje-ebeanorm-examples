@@ -22,9 +22,9 @@ public class Order : BaseModel() {
   companion object: Model.Find<Long, Order>(){}
 
   enum class Status {
-    NEW
-    APPROVED
-    SHIPPED
+    NEW,
+    APPROVED,
+    SHIPPED,
     COMPLETE
   }
 
@@ -40,7 +40,7 @@ public class Order : BaseModel() {
   ManyToOne
   public var shippingAddress: Address? = null;
 
-  OneToMany(mappedBy="order", cascade=array(CascadeType.PERSIST))
+  OneToMany(mappedBy = "order", cascade = arrayOf(CascadeType.PERSIST))
   OrderBy("id asc")
   public var details: MutableList<OrderDetail> = ArrayList();
   
