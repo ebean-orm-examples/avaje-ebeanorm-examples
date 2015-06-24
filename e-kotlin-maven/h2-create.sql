@@ -59,11 +59,11 @@ create table o_order (
 
 create table o_order_detail (
   id                        bigint not null,
-  order_id                  bigint,
+  order_id                  bigint not null,
   order_qty                 integer,
   ship_qty                  integer,
   unit_price                double,
-  product_id                bigint,
+  product_id                bigint not null,
   version                   bigint not null,
   when_created              timestamp not null,
   when_updated              timestamp not null,

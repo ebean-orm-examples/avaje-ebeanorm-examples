@@ -3,6 +3,7 @@ package org.example.domain;
 import com.avaje.ebean.Model
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size;
 
 
@@ -13,11 +14,11 @@ Entity
 Table(name = "o_product")
 public class Product (
 
- Size(max = 20)
- public var sku: String? = null,
+ NotNull Size(max = 20)
+ public var sku: String = "",
 
- Size(max = 100)
- public var name: String? = null
+ NotNull Size(max = 100)
+ public var name: String = ""
 
 ) : BaseModel() {
 

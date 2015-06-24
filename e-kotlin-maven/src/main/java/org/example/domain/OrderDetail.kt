@@ -11,18 +11,17 @@ import javax.validation.constraints.NotNull
  */
 Entity
 Table(name = "o_order_detail")
-public class OrderDetail : BaseModel() {
+public class OrderDetail() : BaseModel() {
 
-  companion object: Model.Find<Long, Order>() {
+  companion object : Model.Find<Long, Order>() {}
 
-    /**
-     * A constructor method - hmmm.
-     */
-    fun of(p:Product, orderQty: Int, unitPrice: Double) : OrderDetail {
-      val d = OrderDetail();
-      d.set(p, orderQty, unitPrice);
-      return d;
-    }
+  /**
+   * Construct with product, order quantity and unit price.
+   */
+  constructor(product: Product, orderQty: Int, unitPrice: Double) : this() {
+    this.product = product
+    this.orderQty = orderQty
+    this.unitPrice = unitPrice
   }
 
   /**
@@ -45,8 +44,8 @@ public class OrderDetail : BaseModel() {
   /**
    * Helper method to set some properties.
    */
-  fun set(p:Product, orderQty: Int, unitPrice: Double) {
-    this.product = p;
+  fun set(product: Product, orderQty: Int, unitPrice: Double) {
+    this.product = product;
     this.unitPrice = unitPrice
     this.orderQty = orderQty
   }

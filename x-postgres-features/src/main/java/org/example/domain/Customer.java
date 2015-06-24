@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.avaje.ebean.annotation.ColumnHstore;
+import com.avaje.ebean.annotation.DbHstore;
 
 /**
  * Customer entity bean.
@@ -31,7 +31,7 @@ public class Customer extends BaseModel {
   @Column(length=1000)
   String comments;
 
-  @ColumnHstore
+  @DbHstore
   Map<String, String> tags;
 
   public String toString() {

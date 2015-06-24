@@ -19,7 +19,7 @@ Entity
 Table(name = "o_order")
 public class Order : BaseModel() {
 
-  companion object: Model.Find<Long, Order>(){}
+  companion object : Model.Find<Long, Order>() {}
 
   enum class Status {
     NEW,
@@ -35,7 +35,7 @@ public class Order : BaseModel() {
   public var shipDate: Date? = null;
 
   ManyToOne NotNull
-  public var customer:Customer? = null;
+  public var customer: Customer? = null;
 
   ManyToOne
   public var shippingAddress: Address? = null;
@@ -43,12 +43,12 @@ public class Order : BaseModel() {
   OneToMany(mappedBy = "order", cascade = arrayOf(CascadeType.PERSIST))
   OrderBy("id asc")
   public var details: MutableList<OrderDetail> = ArrayList();
-  
+
 
   /**
    * Set the customer with their current shipping address.
    */
-  fun setCustomerWithShipping(customer:Customer) {
+  fun setCustomerWithShipping(customer: Customer) {
     this.customer = customer;
     this.shippingAddress = customer.shippingAddress;
   }
@@ -56,7 +56,7 @@ public class Order : BaseModel() {
   /**
    * Add an order detail.
    */
-  fun add(product:Product, orderQty: Int, unitPrice: Double) : OrderDetail {
+  fun add(product: Product, orderQty: Int, unitPrice: Double): OrderDetail {
     val detail = OrderDetail();
     detail.order = this
     detail.set(product, orderQty, unitPrice);
@@ -66,7 +66,7 @@ public class Order : BaseModel() {
   /**
    * Add an order detail
    */
-  fun add(detail:OrderDetail ) {
+  fun add(detail: OrderDetail) {
     details.add(detail);
   }
 

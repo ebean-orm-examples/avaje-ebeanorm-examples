@@ -22,7 +22,7 @@ public class Address : BaseModel() {
   Size(max = 100)
   public var city: String? = null;
 
-  ManyToOne(optional=false)
+  ManyToOne(optional = false)
   public var country: Country? = null;
 
   companion object : Model.Find<Long, Address>() {}

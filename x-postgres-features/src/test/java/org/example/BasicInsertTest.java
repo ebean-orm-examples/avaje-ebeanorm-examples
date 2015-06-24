@@ -1,6 +1,7 @@
 package org.example;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.Transactional;
 import org.example.domain.Customer;
 import org.example.domain.User;
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertNull;
 
 public class BasicInsertTest extends ExampleBaseTestCase {
 
+  @Transactional
   @Test
   public void testInsert() throws IOException {
     
@@ -25,7 +27,8 @@ public class BasicInsertTest extends ExampleBaseTestCase {
     tags.put("height","100");
     tags.put("length","400");
     tags.put("trim","large");
-    
+    tags.put("colour","red");
+
     customer.setTags(tags);
     customer.save();
     

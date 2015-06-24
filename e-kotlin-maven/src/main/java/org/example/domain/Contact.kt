@@ -17,16 +17,16 @@ Table(name = "be_contact")
 public class Contact() : BaseModel() {
 
 
-  Size(max=50)
+  Size(max = 50)
   public var firstName: String? = null;
 
-  Size(max=50)
+  Size(max = 50)
   public var lastName: String? = null;
 
-  Size(max=200)
+  Size(max = 200)
   public var email: String? = null;
 
-  Size(max=20)
+  Size(max = 20)
   public var phone: String? = null;
 
   NotNull
@@ -36,7 +36,7 @@ public class Contact() : BaseModel() {
   /**
    * Construct with firstName and lastName.
    */
-  constructor(firstName:String, lastName:String) : this() {
+  constructor(firstName: String, lastName: String) : this() {
     this.firstName = firstName;
     this.lastName = lastName;
   }

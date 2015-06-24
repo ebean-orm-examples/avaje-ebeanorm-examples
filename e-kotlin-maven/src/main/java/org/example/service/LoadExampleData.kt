@@ -40,7 +40,6 @@ public class LoadExampleData {
 
   fun deleteAll() {
 
-    // using an 'extension function'
     Ebean.execute({
 
       // orm update use bean name and bean properties
@@ -58,8 +57,8 @@ public class LoadExampleData {
 
   fun insertCountries() {
 
-    Country("NZ", "New Zealand 22").save()
-    Country("AU", "Australia 22").save()
+    Country("NZ", "New Zealand").save()
+    Country("AU", "Australia").save()
   }
 
   fun insertProducts() {

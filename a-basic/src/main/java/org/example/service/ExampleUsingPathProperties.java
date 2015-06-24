@@ -39,9 +39,9 @@ public class ExampleUsingPathProperties extends LoadAgentAtRuntime {
     
     List<Customer> list = query.findList();
     
-    JsonContext jsonContext = Customer.find.db().createJsonContext();
+    JsonContext jsonContext = Customer.find.db().json();
     
-    String jsonString = jsonContext.toJsonString(list, true);
+    String jsonString = jsonContext.toJson(list);
     System.out.println(jsonString);
 
     
@@ -68,7 +68,7 @@ public class ExampleUsingPathProperties extends LoadAgentAtRuntime {
     
     List<Order> orders = query.where().gt("id", 1).findList();
 
-    String rawJson = Ebean.createJsonContext().toJsonString(orders, true);
+    String rawJson = Ebean.json().toJson(orders);
     System.out.println(rawJson);
   }
   

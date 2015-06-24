@@ -1,6 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.avaje.jetty</groupId>
+    <artifactId>runnable-war</artifactId>
+    <version>2.1.1</version>
+  </parent>
+  
   <groupId>org.example</groupId>
   <artifactId>e-kotlin-maven</artifactId>
   <version>1.0.1-SNAPSHOT</version>
@@ -10,13 +17,26 @@
 
   <properties>
     <kotlin.version>0.12.213</kotlin.version>
+    <jetty.version>9.2.11.v20150529</jetty.version>
   </properties>
 
   <dependencies>
 
     <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
       <version>${kotlin.version}</version>
     </dependency>
 
@@ -95,17 +115,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.3</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       
       <plugin>
         <groupId>org.avaje.ebeanorm</groupId>
         <artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
-        <version>4.1.8</version>
+        <version>4.5.3</version>
         <executions>
            <execution>
             <id>main</id>
@@ -129,20 +149,19 @@
         <executions>
           <execution>
             <id>compile</id>
-            <phase>process-sources</phase>
+            <phase>compile</phase>
             <goals>
               <goal>compile</goal>
             </goals>
             <configuration>
               <sourceDirs>
-                <source>src/main/resources</source>
                 <source>src/main/java</source>
               </sourceDirs>
             </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
-            <phase>process-test-sources</phase>
+            <phase>test-compile</phase>
             <goals>
               <goal>test-compile</goal>
             </goals>
