@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "o_order")
 public class Order extends BaseModel {
 
-  public static final Finder<Long,Order> find = new Finder<>(Long.class, Order.class);
+  public static final Finder<Long,Order> find = new Finder<>(Order.class);
 
   public enum Status {
     NEW, APPROVED, SHIPPED, COMPLETE
@@ -27,7 +27,7 @@ public class Order extends BaseModel {
 
   Status status;
 
-  Date orderDate;;
+  Date orderDate;
 
   Date shipDate;
 
@@ -127,7 +127,7 @@ public class Order extends BaseModel {
   public void addDetail(OrderDetail detail) {
 
     if (details == null) {
-      details = new ArrayList<OrderDetail>();
+      details = new ArrayList<>();
     }
     details.add(detail);
   }

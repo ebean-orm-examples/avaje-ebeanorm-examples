@@ -13,7 +13,7 @@ public class Contact extends BaseModel {
   /**
    * Convenience Finder for 'active record' style.
    */
-  public static final Finder<Long,Contact> find = new Finder<>(Long.class, Contact.class);
+  public static final Finder<Long,Contact> find = new Finder<>(Contact.class);
   
   @Column(length=50)
   String firstName;

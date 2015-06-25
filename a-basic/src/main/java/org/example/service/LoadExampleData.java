@@ -137,8 +137,7 @@ public class LoadExampleData {
 
     LoadExampleData me = new LoadExampleData();
     Customer cust1 = insertCustomer(custName);
-    Order o = me.createOrder1(cust1);
-    return o;
+    return me.createOrder1(cust1);
   }
 
   private static int contactEmailNum = 1;
@@ -230,7 +229,7 @@ public class LoadExampleData {
     Order order = new Order();
     order.setCustomer(customer);
 
-    List<OrderDetail> details = new ArrayList<OrderDetail>();
+    List<OrderDetail> details = new ArrayList<>();
     details.add(new OrderDetail(product1, 5, 10.50));
     details.add(new OrderDetail(product2, 3, 1.10));
     details.add(new OrderDetail(product3, 1, 2.00));
@@ -250,7 +249,7 @@ public class LoadExampleData {
     order.setStatus(Status.SHIPPED);
     order.setCustomer(customer);
 
-    List<OrderDetail> details = new ArrayList<OrderDetail>();
+    List<OrderDetail> details = new ArrayList<>();
     details.add(new OrderDetail(product1, 4, 10.50));
     order.setDetails(details);
 
@@ -268,7 +267,7 @@ public class LoadExampleData {
     order.setStatus(Status.COMPLETE);
     order.setCustomer(customer);
 
-    List<OrderDetail> details = new ArrayList<OrderDetail>();
+    List<OrderDetail> details = new ArrayList<>();
     details.add(new OrderDetail(product1, 3, 10.50));
     details.add(new OrderDetail(product3, 40, 2.10));
     order.setDetails(details);

@@ -21,7 +21,7 @@ public class Customer extends BaseModel {
   /**
    * Convenience Finder for 'active record' style.
    */
-  public static final Finder<Long,Customer> find = new Finder<>(Long.class, Customer.class);
+  public static final Finder<Long,Customer> find = new Finder<>(Customer.class);
   
   boolean inactive;
   

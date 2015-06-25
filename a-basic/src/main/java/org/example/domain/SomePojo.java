@@ -16,11 +16,6 @@ public class SomePojo {
   
   @Action
   public String getName() {
-    
-//    foos.forEach(val -> {
-//      System.out.println("hello "+val);
-//    });
-    
     return name;
   }
 

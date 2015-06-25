@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ContactNote extends BaseModel {
 
-  public static final Finder<Long, ContactNote> find = new Finder<>(Long.class, ContactNote.class);
+  public static final Finder<Long, ContactNote> find = new Finder<>(ContactNote.class);
 
   @ManyToOne(optional = false)
   Contact contact;
