@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.domain.finder.CustomerFinder;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Customer extends BaseModel {
   /**
    * Convenience Finder for 'active record' style.
    */
-  public static final Finder<Long,Customer> find = new Finder<>(Customer.class);
+  public static final CustomerFinder find = new CustomerFinder();
   
   boolean inactive;
   

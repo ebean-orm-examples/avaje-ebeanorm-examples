@@ -1,8 +1,6 @@
 package org.example.domain;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import org.example.domain.finder.OrderFinder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Order entity bean.
@@ -19,7 +20,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "o_order")
 public class Order extends BaseModel {
 
-  public static final Finder<Long,Order> find = new Finder<>(Order.class);
+  /**
+   * Convenience Finder for 'active record' style.
+   */
+  public static final OrderFinder find = new OrderFinder();
 
   public enum Status {
     NEW, APPROVED, SHIPPED, COMPLETE

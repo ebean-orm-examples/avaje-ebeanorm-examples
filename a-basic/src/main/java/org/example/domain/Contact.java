@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.domain.finder.ContactFinder;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Contact extends BaseModel {
   /**
    * Convenience Finder for 'active record' style.
    */
-  public static final Finder<Long,Contact> find = new Finder<>(Contact.class);
+  public static final ContactFinder find = new ContactFinder();
   
   @Column(length=50)
   String firstName;
