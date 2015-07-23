@@ -59,8 +59,8 @@ public class CustomerFindByIdAsAtTest {
 
     Customer customer =
         Customer.find.query()
-            .asOf(asOf)
             .where().eq("name", "jack")
+            .asOf(asOf)
             .findUnique();
 
     System.out.println("customer: " +customer);
