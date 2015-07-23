@@ -1,7 +1,10 @@
-package org.example.domain;
+package org.example.domain.excludem2m;
 
+import com.avaje.ebean.Model;
 import com.avaje.ebean.annotation.History;
-import org.example.domain.finder.CustomerFinder;
+import com.avaje.ebean.annotation.HistoryExclude;
+import org.example.domain.Address;
+import org.example.domain.BaseModel;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,17 +17,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Customer entity bean.
+ * Test Customer that @HistoryExclude on the features ManyToMany property.
  */
 @History
 @Entity
 @Table(name="customer")
-public class Customer extends BaseModel {
+public class CustomerExcludeM2M extends BaseModel {
 
-  /**
-   * Convenience Finder for 'active record' style.
-   */
-  public static final CustomerFinder find = new CustomerFinder();
+  public static final Model.Finder<Long,CustomerExcludeM2M> find = new Model.Finder<>(CustomerExcludeM2M.class);
 
   @Size(max = 100)
   String name;
@@ -41,16 +41,20 @@ public class Customer extends BaseModel {
   Address shippingAddress;
 
   @OneToMany(mappedBy="customer")
-  List<Contact> contacts;
+  List<ContactExcludeM2M> contacts;
 
+  /**
+   * HistoryExclude on ManyToMany means the intersection table does not have history.
+   */
+  @HistoryExclude
   @ManyToMany
-  List<Feature> features;
+  List<FeatureExcludeM2M> features;
 
 
   public String toString() {
     return "id"+id+" name:"+name+" comments:"+comments;
   }
-
+  
   public String getName() {
     return name;
   }
@@ -91,19 +95,19 @@ public class Customer extends BaseModel {
     this.shippingAddress = shippingAddress;
   }
 
-  public List<Contact> getContacts() {
+  public List<ContactExcludeM2M> getContacts() {
     return contacts;
   }
 
-  public void setContacts(List<Contact> contacts) {
+  public void setContacts(List<ContactExcludeM2M> contacts) {
     this.contacts = contacts;
   }
 
-  public List<Feature> getFeatures() {
+  public List<FeatureExcludeM2M> getFeatures() {
     return features;
   }
 
-  public void setFeatures(List<Feature> features) {
+  public void setFeatures(List<FeatureExcludeM2M> features) {
     this.features = features;
   }
 }

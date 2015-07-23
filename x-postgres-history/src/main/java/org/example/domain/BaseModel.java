@@ -23,16 +23,16 @@ import java.sql.Timestamp;
 public abstract class BaseModel extends Model {
 
   @Id
-  Long id;
+  protected Long id;
 
   @Version
-  Long version;
+  protected Long version;
 
   @CreatedTimestamp
-  Timestamp whenCreated;
+  protected Timestamp whenCreated;
 
   @UpdatedTimestamp
-  Timestamp whenUpdated;
+  protected Timestamp whenUpdated;
 
   public Long getId() {
     return id;
