@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * Product entity bean.
  */
 @Entity
-@Table(name = "o_product")
+@Table(name = "product")
 public class Product extends BaseModel {
 
   /**
