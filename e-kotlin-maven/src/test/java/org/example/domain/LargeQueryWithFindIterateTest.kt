@@ -1,11 +1,9 @@
 package org.example.domain;
 
-import com.avaje.ebean.QueryResultVisitor;
-import org.example.ExampleBaseTestCase;
-import org.junit.Test;
-
-import org.avaje.agentloader.AgentLoader
 import com.avaje.ebean.Ebean
+import org.avaje.agentloader.AgentLoader
+import org.example.ExampleBaseTestCase
+import org.junit.Test
 import kotlin.platform.platformStatic
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {

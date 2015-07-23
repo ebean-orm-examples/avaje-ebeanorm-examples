@@ -1,11 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+  <modules>
+    <module>typequery</module>
+  </modules>
 
   <parent>
     <groupId>org.avaje.jetty</groupId>
     <artifactId>runnable-war</artifactId>
-    <version>2.1.1</version>
+    <version>2.1.2</version>
   </parent>
   
   <groupId>org.example</groupId>
@@ -16,7 +20,7 @@
   <description>Example using Ebean in Kotlin via Maven plugin</description>
 
   <properties>
-    <kotlin.version>0.12.213</kotlin.version>
+    <kotlin.version>0.12.1218</kotlin.version>
     <jetty.version>9.2.11.v20150529</jetty.version>
   </properties>
 
@@ -43,7 +47,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>[4.6,)</version>
+      <version>[6.1.1]</version>
     </dependency>
 
     <!-- 

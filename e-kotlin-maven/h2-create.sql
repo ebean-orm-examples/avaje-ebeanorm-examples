@@ -72,8 +72,8 @@ create table o_order_detail (
 
 create table o_product (
   id                        bigint not null,
-  sku                       varchar(20),
-  name                      varchar(100),
+  sku                       varchar(20) not null,
+  name                      varchar(100) not null,
   version                   bigint not null,
   when_created              timestamp not null,
   when_updated              timestamp not null,
