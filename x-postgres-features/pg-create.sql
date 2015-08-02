@@ -19,6 +19,14 @@ create table p_doc (
   constraint pk_p_doc primary key (id))
 ;
 
+create table p_doc_jsonnode (
+  id                        bigserial not null,
+  name                      varchar(255),
+  content                   jsonb,
+  version                   bigint not null,
+  constraint pk_p_doc_jsonnode primary key (id))
+;
+
 create table p_user (
   user_id                   bigserial not null,
   name                      varchar(255),
