@@ -12,7 +12,7 @@ public class CustomerTest {
   public void updateJim() {
 
     Customer jim = Customer.find.byName("jim");
-    jim.setComments("Jack asdasdads lost");
+    jim.setComments("another update");
     jim.save();
   }
 

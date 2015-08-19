@@ -19,9 +19,35 @@ public class CustomerFindByIdAsAtTest {
   }
 
   @Test
+  public void oracle_test_queryAsOf() {
+
+    long epochMilli = OffsetDateTime.now().minusMinutes(3).toInstant().toEpochMilli();
+    Timestamp asOf = new Timestamp(epochMilli);
+
+    LoggedSql.start();
+
+    Customer customer =
+        Customer.find.query()
+            .asOf(asOf)
+            .fetch("billingAddress")
+            .where().eq("name", "jim")
+            .findUnique();
+
+    List<String> loggedSql = LoggedSql.stop();
+    assertThat(loggedSql).hasSize(1);
+
+    String sqlSelect = loggedSql.get(0);
+
+    assertThat(sqlSelect.contains(" from customer as of TIMESTAMP ? t0 ")).isTrue();
+    assertThat(sqlSelect.contains(" join o_address as of TIMESTAMP ? t1 ")).isTrue();
+
+    System.out.println("customer: " +customer);
+  }
+
+  @Test
   public void test_queryAsOf() {
 
-    long epochMilli = OffsetDateTime.now().minusHours(3).toInstant().toEpochMilli();
+    long epochMilli = OffsetDateTime.now().minusMinutes(3).toInstant().toEpochMilli();
     Timestamp asOf = new Timestamp(epochMilli);
 
     LoggedSql.start();
