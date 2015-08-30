@@ -1,9 +1,11 @@
 package org.example.domain;
 
 
-import com.avaje.ebean.FetchConfig;
-import com.avaje.ebean.QueryIterator;
+import com.avaje.ebean.ExpressionList;
+import com.avaje.ebean.QueryEachConsumer;
 import org.example.ExampleBaseTestCase;
+import org.example.domain.query.QOrder;
+import org.example.domain.query.QOrderDetail;
 import org.example.service.LoadExampleData;
 import org.junit.Test;
 
@@ -16,25 +18,50 @@ public class ExFindIterate extends ExampleBaseTestCase {
 
     LoadExampleData.load();
 
-    QueryIterator<Order> orders = Order.find
-        .select("status")
-        .fetch("customer")
-        .fetch("customer.contacts", new FetchConfig().query(1))
-        .fetch("details", new FetchConfig().query(1))
-        .orderBy("customer.name")
-        .findIterate();
+    ExpressionList<OrderDetail> detailsFilter = new QOrderDetail()
+        .unitPrice.isNotNull()
+        .getExpressionList();
 
-    try {
-      while(orders.hasNext()) {
-        Order order = orders.next();
-        Customer customer = order.getCustomer();
-        List<Contact> contacts = customer.getContacts();
-        System.out.println(contacts);
+    Customer cust1 = Customer.find.ref(1L);
 
-      }
-    } finally {
-      orders.close();
-    }
+    new QOrder()
+        //.id.gt(0)
+        .status.in(Order.Status.APPROVED, Order.Status.COMPLETE)
+        .customer.equalTo(cust1)
+        .details.filterMany(detailsFilter)
+        .findList();
+
+    new QOrder()
+        .id.greaterThan(1)
+        .findEach(new QueryEachConsumer<Order>() {
+          @Override
+          public void accept(Order order) {
+            Customer customer = order.getCustomer();
+            List<Contact> contacts = customer.getContacts();
+            System.out.println(contacts);
+          }
+        });
+
+//
+//    QueryIterator<Order> orders = Order.find
+//        .select("status")
+//        .fetch("customer")
+//        .fetch("customer.contacts", new FetchConfig().query(1))
+//        .fetch("details", new FetchConfig().query(1))
+//        .orderBy("customer.name")
+//        .findIterate();
+//
+//    try {
+//      while(orders.hasNext()) {
+//        Order order = orders.next();
+//        Customer customer = order.getCustomer();
+//        List<Contact> contacts = customer.getContacts();
+//        System.out.println(contacts);
+//
+//      }
+//    } finally {
+//      orders.close();
+//    }
 
 
   }

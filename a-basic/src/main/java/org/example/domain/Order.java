@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import com.avaje.ebean.annotation.EnumValue;
 import org.example.domain.finder.OrderFinder;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,14 @@ public class Order extends BaseModel {
   public static final OrderFinder find = new OrderFinder();
 
   public enum Status {
-    NEW, APPROVED, SHIPPED, COMPLETE
+    @EnumValue("N")
+    NEW,
+    @EnumValue("A")
+    APPROVED,
+    @EnumValue("S")
+    SHIPPED,
+    @EnumValue("C")
+    COMPLETE
   }
 
   Status status;
