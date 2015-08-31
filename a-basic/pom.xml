@@ -112,15 +112,15 @@
       <plugin>
         <groupId>org.avaje.ebeanorm</groupId>
         <artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
-        <version>4.6.1</version>
+        <version>4.7.1</version>
         <executions>
            <execution>
             <id>main</id>
             <phase>process-classes</phase>
             <configuration>
-              <!--<classSource>target/classes</classSource>-->
-              <!--<packages>org.example.domain.**</packages>-->
-              <!--<transformArgs>debug=1</transformArgs>-->
+              <classSource>target/classes</classSource>
+              <packages>org.example.domain.**</packages>
+              <transformArgs>debug=1</transformArgs>
             </configuration>
             <goals>
               <goal>enhance</goal>
