@@ -17,8 +17,9 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
   public void test() {
 
     Customer customer =
-       Customer.find.select("name, email")
-            .where().idEq(12)
+       Customer.find.where()
+            .id.eq(12)
+            .select("name, email")
             .findUnique();
   }
 
@@ -39,12 +40,12 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
     LoadExampleData.load();
 
     Country country = Ebean.getReference(Country.class, "NZ");
-    List<Customer> customers =
-      Customer.find
+    List<Customer> customers = new QCustomer()
         .select("name")
-        .where().eq("billingAddress.country", country)
-          .order().asc("name")
-          .findList();
+        .billingAddress.country.equalTo(country)
+        .orderBy()
+          .name.asc()
+        .findList();
 
     List<Customer> customers2 = new QCustomer()
         .select("name")

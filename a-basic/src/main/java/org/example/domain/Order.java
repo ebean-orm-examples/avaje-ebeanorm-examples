@@ -37,7 +37,8 @@ public class Order extends BaseModel {
     COMPLETE
   }
 
-  Status status;
+  @NotNull
+  Status status = Status.NEW;
 
   Date orderDate;
 

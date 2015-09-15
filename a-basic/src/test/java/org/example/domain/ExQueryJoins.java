@@ -15,7 +15,7 @@ public class ExQueryJoins extends ExampleBaseTestCase {
 
     LoadExampleData.load();
 
-    List<Order> orders = Order.find
+    List<Order> orders = Order.find.query()
         .select("status")
         .fetch("customer")
         .fetch("customer.contacts")
@@ -33,6 +33,7 @@ public class ExQueryJoins extends ExampleBaseTestCase {
     LoadExampleData.load();
 
     List<Customer> customers = Customer.find
+        .query()
         .fetch("contacts")
         .fetch("contacts.notes")
         .orderBy("name")

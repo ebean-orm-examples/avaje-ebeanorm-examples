@@ -104,7 +104,7 @@ public class InsertCustomerTest extends ExampleBaseTestCase {
     
       List<Customer> customers = 
           Customer.find.
-            where().ilike("name", "rob%")
+            where().name.ilike("rob%")
             .findList();
     
       assertNotNull(customers);

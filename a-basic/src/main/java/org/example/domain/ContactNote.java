@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import org.example.domain.finder.ContactNoteFinder;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -7,7 +8,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ContactNote extends BaseModel {
 
-  public static final Finder<Long, ContactNote> find = new Finder<>(ContactNote.class);
+  public static final ContactNoteFinder find = new ContactNoteFinder();
 
   @ManyToOne(optional = false)
   Contact contact;

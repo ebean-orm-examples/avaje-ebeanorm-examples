@@ -12,9 +12,9 @@ public class ExPartialObjects extends ExampleBaseTestCase {
 
     LoadExampleData.load();
 
-    Customer customer = Customer.find
+    Customer customer = Customer.
+        find.where().id.equalTo(1L)
         .select("name")
-        .where().idEq(1L)
         .findUnique();
 
     customer.hashCode();
@@ -27,7 +27,7 @@ public class ExPartialObjects extends ExampleBaseTestCase {
 
     LoadExampleData.load();
 
-    Order order = Order.find
+    Order order = Order.find.query()
         .select("status, orderDate, shipDate")
         .fetch("customer", "name")
         .fetch("details")

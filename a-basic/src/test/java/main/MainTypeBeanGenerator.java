@@ -23,12 +23,12 @@ public class MainTypeBeanGenerator {
     //config.setMaxPathTraversalDepth(3);
     //config.setAopStyle(false);
 
-    //config.setOverwriteExistingFinders(true);
+    config.setOverwriteExistingFinders(true);
 
     Generator generator = new Generator(config);
     generator.generateQueryBeans();
-    //generator.generateFinders();
-    //generator.modifyEntityBeansAddFinderField();
+    generator.generateFinders();
+    generator.modifyEntityBeansAddFinderField();
 
   }
 }
