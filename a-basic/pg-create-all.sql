@@ -1,5 +1,5 @@
 create table o_address (
-  id                            bigint not null,
+  id                            bigserial not null,
   line1                         varchar(100),
   line2                         varchar(100),
   city                          varchar(100),
@@ -9,10 +9,9 @@ create table o_address (
   when_updated                  timestamp not null,
   constraint pk_o_address primary key (id)
 );
-create sequence o_address_seq;
 
 create table be_contact (
-  id                            bigint not null,
+  id                            bigserial not null,
   first_name                    varchar(50),
   last_name                     varchar(50),
   email                         varchar(200),
@@ -23,19 +22,17 @@ create table be_contact (
   when_updated                  timestamp not null,
   constraint pk_be_contact primary key (id)
 );
-create sequence be_contact_seq;
 
 create table contact_note (
-  id                            bigint not null,
+  id                            bigserial not null,
   contact_id                    bigint not null,
   title                         varchar(255),
-  note                          clob,
+  note                          text,
   version                       bigint not null,
   when_created                  timestamp not null,
   when_updated                  timestamp not null,
   constraint pk_contact_note primary key (id)
 );
-create sequence contact_note_seq;
 
 create table o_country (
   code                          varchar(2) not null,
@@ -44,7 +41,7 @@ create table o_country (
 );
 
 create table be_customer (
-  id                            bigint not null,
+  id                            bigserial not null,
   inactive                      boolean,
   name                          varchar(100),
   registered                    timestamp,
@@ -56,10 +53,9 @@ create table be_customer (
   when_updated                  timestamp not null,
   constraint pk_be_customer primary key (id)
 );
-create sequence be_customer_seq;
 
 create table o_order (
-  id                            bigint not null,
+  id                            bigserial not null,
   status                        varchar(1) not null,
   order_date                    date,
   ship_date                     date,
@@ -71,24 +67,22 @@ create table o_order (
   constraint ck_o_order_status check (status in ('N','C','A','S')),
   constraint pk_o_order primary key (id)
 );
-create sequence o_order_seq;
 
 create table o_order_detail (
-  id                            bigint not null,
+  id                            bigserial not null,
   order_id                      bigint,
   order_qty                     integer,
   ship_qty                      integer,
-  unit_price                    double,
+  unit_price                    float,
   product_id                    bigint,
   version                       bigint not null,
   when_created                  timestamp not null,
   when_updated                  timestamp not null,
   constraint pk_o_order_detail primary key (id)
 );
-create sequence o_order_detail_seq;
 
 create table o_product (
-  id                            bigint not null,
+  id                            bigserial not null,
   sku                           varchar(20),
   name                          varchar(255),
   version                       bigint not null,
@@ -96,7 +90,6 @@ create table o_product (
   when_updated                  timestamp not null,
   constraint pk_o_product primary key (id)
 );
-create sequence o_product_seq;
 
 alter table o_address add constraint fk_o_address_country_code foreign key (country_code) references o_country (code) on delete restrict on update restrict;
 create index ix_o_address_country_code on o_address (country_code);

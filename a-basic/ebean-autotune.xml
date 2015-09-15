@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<autotune xmlns="http://ebean-orm.github.io/xml/ns/autotune">
+
+  <origin key="wpbnw.BQejAt.CEpARJ" beanType="org.example.domain.Order"
+          detail="select (orderDate,shipDate)  fetch customer (id,name)  fetch customer.contacts (firstName,lastName,id) "
+          original="select (orderDate,shipDate)  fetch customer (id,name,comments) ">
+    <callStack>org.example.domain.finder.OrderFinder.byStatus(OrderFinder.java:40)
+      org.example.domain.finder.OrderFinderTest.testOther(OrderFinderTest.java:61)
+      sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+      sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    </callStack>
+  </origin>
+  <origin key="wpbnw.BQejAt.BzqcH1" beanType="org.example.domain.Order"
+          detail="select (orderDate,shipDate,status)  fetch customer (+lazy,id,name)  fetch details (+query,id,unitPrice,shipQty)  fetch details.product (id,name) "
+          original="select ">
+    <callStack>org.example.domain.finder.OrderFinder.byStatus(OrderFinder.java:40)
+      org.example.domain.finder.OrderFinderTest.test(OrderFinderTest.java:29)
+      sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+      sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    </callStack>
+  </origin>
+  <origin key="wpbnw.BmEAFW.BvQ020" beanType="org.example.domain.Order"
+          detail="select  fetch customer (id,name)  fetch details (id,orderQty,shipQty,unitPrice)  fetch details.product (id,name) "
+          original="select ">
+    <callStack>org.example.domain.finder.OrderFinderTest.testOrdersSince(OrderFinderTest.java:87)
+      sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+      sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+      java.lang.reflect.Method.invoke(Method.java:497)
+    </callStack>
+  </origin>
+</autotune>
