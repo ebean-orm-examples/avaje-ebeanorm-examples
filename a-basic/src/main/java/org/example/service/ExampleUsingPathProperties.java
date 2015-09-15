@@ -26,6 +26,7 @@ public class ExampleUsingPathProperties extends LoadAgentAtRuntime {
     LoadExampleData.load();
     
     List<Customer> list2 = Customer.find
+        .query()
       .select("name")
       .fetch("contacts")
       .findList();

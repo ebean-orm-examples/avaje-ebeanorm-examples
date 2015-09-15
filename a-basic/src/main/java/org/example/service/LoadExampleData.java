@@ -28,6 +28,10 @@ public class LoadExampleData {
       return;
     }
 
+    if (Country.find.query().findRowCount() > 0) {
+      return;
+    }
+
     final LoadExampleData me = new LoadExampleData();
 
     server.execute(new TxRunnable() {
