@@ -1,21 +1,36 @@
 package org.example.domain.finder;
 
-import com.avaje.ebean.Model;
+import com.avaje.ebean.Finder;
 import org.example.domain.Customer;
+import org.example.domain.query.QCustomer;
 
-/**
- * Add finder methods here.
- */
-public class CustomerFinder extends Model.Finder<Long,Customer> {
+public class CustomerFinder extends Finder<Long,Customer> {
 
+  /**
+   * Construct using the default EbeanServer.
+   */
   public CustomerFinder() {
     super(Customer.class);
+  }
+
+  /**
+   * Construct with a given EbeanServer.
+   */
+  public CustomerFinder(String serverName) {
+    super(Customer.class, serverName);
+  }
+
+  /**
+   * Start a new typed query.
+   */
+  public QCustomer where() {
+     return new QCustomer();
   }
 
   /**
    * Find by name equal (case insensitive).
    */
   public Customer byName(String name) {
-    return where().ieq("name", name).findUnique();
+    return where().name.iequalTo(name).findUnique();
   }
 }

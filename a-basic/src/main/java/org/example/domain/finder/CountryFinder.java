@@ -1,23 +1,38 @@
 package org.example.domain.finder;
 
-import com.avaje.ebean.Model;
+import com.avaje.ebean.Finder;
 import org.example.domain.Country;
+import org.example.domain.query.QCountry;
 
 import java.util.List;
 
-/**
- * Add finder methods here.
- */
-public class CountryFinder extends Model.Finder<String,Country> {
+public class CountryFinder extends Finder<String,Country> {
 
+  /**
+   * Construct using the default EbeanServer.
+   */
   public CountryFinder() {
     super(Country.class);
+  }
+
+  /**
+   * Construct with a given EbeanServer.
+   */
+  public CountryFinder(String serverName) {
+    super(Country.class, serverName);
+  }
+
+  /**
+   * Start a new typed query.
+   */
+  protected QCountry where() {
+     return new QCountry();
   }
 
   /**
    * Return countries with name like (case insensitive).
    */
   public List<Country> byNameLike(String name) {
-    return where().ilike("name", name).findList();
+    return where().name.ilike(name).findList();
   }
 }

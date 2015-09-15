@@ -1,21 +1,29 @@
 package org.example.domain.finder;
 
-import com.avaje.ebean.Model;
+import com.avaje.ebean.Finder;
 import org.example.domain.Product;
+import org.example.domain.query.QProduct;
 
-/**
- * Add finder methods here.
- */
-public class ProductFinder extends Model.Finder<Long,Product> {
+public class ProductFinder extends Finder<Long,Product> {
 
+  /**
+   * Construct using the default EbeanServer.
+   */
   public ProductFinder() {
     super(Product.class);
   }
 
   /**
-   * Find by SKU.
+   * Construct with a given EbeanServer.
    */
-  public Product bySku(String sku) {
-    return where().eq("sku", sku).findUnique();
+  public ProductFinder(String serverName) {
+    super(Product.class, serverName);
+  }
+
+  /**
+   * Start a new typed query.
+   */
+  protected QProduct where() {
+     return new QProduct();
   }
 }
