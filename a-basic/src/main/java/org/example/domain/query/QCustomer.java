@@ -11,6 +11,7 @@ import org.avaje.ebean.typequery.TypeQueryBean;
 import org.example.domain.Customer;
 import org.example.domain.query.assoc.QAssocAddress;
 import org.example.domain.query.assoc.QAssocContact;
+import org.example.domain.query.assoc.QAssocOrder;
 
 @TypeQueryBean
 public class QCustomer extends TQRootBean<Customer,QCustomer> {
@@ -26,6 +27,7 @@ public class QCustomer extends TQRootBean<Customer,QCustomer> {
   public QAssocAddress<QCustomer> billingAddress;
   public QAssocAddress<QCustomer> shippingAddress;
   public QAssocContact<QCustomer> contacts;
+  public QAssocOrder<QCustomer> orders;
 
   /**
    * Construct using the default EbeanServer.

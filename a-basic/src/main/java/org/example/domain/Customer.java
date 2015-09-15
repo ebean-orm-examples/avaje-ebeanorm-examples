@@ -44,6 +44,9 @@ public class Customer extends BaseModel {
   @OneToMany(mappedBy="customer", cascade=CascadeType.PERSIST)
   List<Contact> contacts;
 
+  @OneToMany(mappedBy="customer")
+  List<Order> orders;
+
   public boolean isInactive() {
     return inactive;
   }
@@ -90,6 +93,14 @@ public class Customer extends BaseModel {
 
   public void setShippingAddress(Address shippingAddress) {
     this.shippingAddress = shippingAddress;
+  }
+
+  public List<Order> getOrders() {
+    return orders;
+  }
+
+  public void setOrders(List<Order> orders) {
+    this.orders = orders;
   }
 
   public List<Contact> getContacts() {

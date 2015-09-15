@@ -23,6 +23,7 @@ public class QAssocCustomer<R> extends TQAssocBean<Customer,R> {
   public QAssocAddress<R> billingAddress;
   public QAssocAddress<R> shippingAddress;
   public QAssocContact<R> contacts;
+  public QAssocOrder<R> orders;
 
   public QAssocCustomer(String name, R root) {
     super(name, root);
