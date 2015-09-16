@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import org.example.domain.finder.ContactNoteFinder;
+
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
