@@ -26,7 +26,7 @@ public class CountryFinder extends Finder<String,Country> {
    * Start a new typed query.
    */
   protected QCountry where() {
-     return new QCountry();
+     return new QCountry(db());
   }
 
   /**

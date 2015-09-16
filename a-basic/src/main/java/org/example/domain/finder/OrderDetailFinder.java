@@ -24,6 +24,6 @@ public class OrderDetailFinder extends Finder<Long,OrderDetail> {
    * Start a new typed query.
    */
   protected QOrderDetail where() {
-     return new QOrderDetail();
+     return new QOrderDetail(db());
   }
 }

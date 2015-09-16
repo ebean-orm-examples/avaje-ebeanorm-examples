@@ -24,6 +24,6 @@ public class ContactNoteFinder extends Finder<Long,ContactNote> {
    * Start a new typed query.
    */
   protected QContactNote where() {
-     return new QContactNote();
+     return new QContactNote(db());
   }
 }

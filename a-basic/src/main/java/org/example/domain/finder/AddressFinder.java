@@ -26,7 +26,7 @@ public class AddressFinder extends Finder<Long,Address> {
    * Start a new typed query.
    */
   protected QAddress where() {
-     return new QAddress();
+     return new QAddress(db());
   }
 
   /**

@@ -24,6 +24,6 @@ public class ProductFinder extends Finder<Long,Product> {
    * Start a new typed query.
    */
   protected QProduct where() {
-     return new QProduct();
+     return new QProduct(db());
   }
 }

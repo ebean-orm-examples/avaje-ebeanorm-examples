@@ -1,7 +1,9 @@
 package org.example.domain.finder;
 
 import com.avaje.ebean.Finder;
+import com.avaje.ebean.OrderBy;
 import com.avaje.ebean.PagedList;
+import com.avaje.ebean.Query;
 import org.example.domain.Order;
 import org.example.domain.query.QOrder;
 
@@ -28,7 +30,7 @@ public class OrderFinder extends Finder<Long,Order> {
    * Start a new typed query.
    */
   protected QOrder where() {
-     return new QOrder();
+     return new QOrder(db());
   }
 
 
@@ -45,12 +47,23 @@ public class OrderFinder extends Finder<Long,Order> {
         .findList();
   }
 
+//  public Query<Order> queryByStatus(Order.Status... values) {
+//
+//    return where()
+//        .status.in(values)
+//        .orderBy()
+//          .orderDate.desc()
+//          .id.desc()
+//        .query();
+//  }
+
   /**
    * Find new orders with an orderDate after the given since value.
    */
   public PagedList<Order> newOrdersSince(Date since, int pageIndex) {
 
     return where()
+        .status.in()
         .status.eq(Order.Status.NEW)
         .or()
           .orderDate.after(since)

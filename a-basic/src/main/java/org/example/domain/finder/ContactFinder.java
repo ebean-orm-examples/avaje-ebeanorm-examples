@@ -26,7 +26,7 @@ public class ContactFinder extends Finder<Long,Contact> {
    * Start a new typed query.
    */
   protected QContact where() {
-     return new QContact();
+     return new QContact(db());
   }
 
   /**
