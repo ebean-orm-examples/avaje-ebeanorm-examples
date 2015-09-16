@@ -33,7 +33,6 @@ public class OrderFinder extends Finder<Long,Order> {
      return new QOrder(db());
   }
 
-
   /**
    * Find orders with the given status.
    */
@@ -46,16 +45,6 @@ public class OrderFinder extends Finder<Long,Order> {
           .id.desc()
         .findList();
   }
-
-//  public Query<Order> queryByStatus(Order.Status... values) {
-//
-//    return where()
-//        .status.in(values)
-//        .orderBy()
-//          .orderDate.desc()
-//          .id.desc()
-//        .query();
-//  }
 
   /**
    * Find new orders with an orderDate after the given since value.
