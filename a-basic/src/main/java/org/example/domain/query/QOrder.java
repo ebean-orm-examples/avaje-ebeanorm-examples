@@ -13,8 +13,21 @@ import org.example.domain.query.assoc.QAssocAddress;
 import org.example.domain.query.assoc.QAssocCustomer;
 import org.example.domain.query.assoc.QAssocOrderDetail;
 
+/**
+ * Query bean for Order.
+ */
 @TypeQueryBean
 public class QOrder extends TQRootBean<Order,QOrder> {
+
+  private static final QOrder _alias = new QOrder(true);
+
+  /**
+   * Return the shared 'Alias' instance used to provide properties to 
+   * <code>select()</code> and <code>fetch()</code> 
+   */
+  public static QOrder alias() {
+    return _alias;
+  }
 
   public PLong<QOrder> id;
   public PLong<QOrder> version;
@@ -27,6 +40,14 @@ public class QOrder extends TQRootBean<Order,QOrder> {
   public QAssocAddress<QOrder> shippingAddress;
   public QAssocOrderDetail<QOrder> details;
 
+
+  /**
+   * Construct with a given EbeanServer.
+   */
+  public QOrder(EbeanServer server) {
+    super(Order.class, server);
+  }
+
   /**
    * Construct using the default EbeanServer.
    */
@@ -35,9 +56,9 @@ public class QOrder extends TQRootBean<Order,QOrder> {
   }
 
   /**
-   * Construct with a given EbeanServer.
+   * Construct for Alias.
    */
-  public QOrder(EbeanServer server) {
-    super(Order.class, server);
+  private QOrder(boolean dummy) {
+    super(dummy);
   }
 }

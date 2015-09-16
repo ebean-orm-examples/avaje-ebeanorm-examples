@@ -6,9 +6,14 @@ import org.avaje.ebean.typequery.PString;
 import org.avaje.ebean.typequery.PTimestamp;
 import org.avaje.ebean.typequery.PUtilDate;
 import org.avaje.ebean.typequery.TQAssocBean;
+import org.avaje.ebean.typequery.TQProperty;
 import org.avaje.ebean.typequery.TypeQueryBean;
 import org.example.domain.Customer;
+import org.example.domain.query.QCustomer;
 
+/**
+ * Association query bean for AssocCustomer.
+ */
 @TypeQueryBean
 public class QAssocCustomer<R> extends TQAssocBean<Customer,R> {
 
@@ -24,6 +29,14 @@ public class QAssocCustomer<R> extends TQAssocBean<Customer,R> {
   public QAssocAddress<R> shippingAddress;
   public QAssocContact<R> contacts;
   public QAssocOrder<R> orders;
+
+  /**
+   * Eagerly fetch this association loading the specified properties.
+   */
+  @SafeVarargs
+  public final R fetch(TQProperty<QCustomer>... properties) {
+    return fetchProperties(properties);
+  }
 
   public QAssocCustomer(String name, R root) {
     super(name, root);

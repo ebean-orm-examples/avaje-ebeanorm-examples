@@ -13,8 +13,21 @@ import org.example.domain.query.assoc.QAssocAddress;
 import org.example.domain.query.assoc.QAssocContact;
 import org.example.domain.query.assoc.QAssocOrder;
 
+/**
+ * Query bean for Customer.
+ */
 @TypeQueryBean
 public class QCustomer extends TQRootBean<Customer,QCustomer> {
+
+  private static final QCustomer _alias = new QCustomer(true);
+
+  /**
+   * Return the shared 'Alias' instance used to provide properties to 
+   * <code>select()</code> and <code>fetch()</code> 
+   */
+  public static QCustomer alias() {
+    return _alias;
+  }
 
   public PLong<QCustomer> id;
   public PLong<QCustomer> version;
@@ -29,6 +42,14 @@ public class QCustomer extends TQRootBean<Customer,QCustomer> {
   public QAssocContact<QCustomer> contacts;
   public QAssocOrder<QCustomer> orders;
 
+
+  /**
+   * Construct with a given EbeanServer.
+   */
+  public QCustomer(EbeanServer server) {
+    super(Customer.class, server);
+  }
+
   /**
    * Construct using the default EbeanServer.
    */
@@ -37,9 +58,9 @@ public class QCustomer extends TQRootBean<Customer,QCustomer> {
   }
 
   /**
-   * Construct with a given EbeanServer.
+   * Construct for Alias.
    */
-  public QCustomer(EbeanServer server) {
-    super(Customer.class, server);
+  private QCustomer(boolean dummy) {
+    super(dummy);
   }
 }
