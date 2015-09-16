@@ -1,13 +1,12 @@
 package org.example.domain;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.QueryEachConsumer;
 import org.example.ExampleBaseTestCase;
+import org.example.domain.query.QContact;
 import org.example.domain.query.QCustomer;
+import org.example.domain.query.QProduct;
 import org.example.service.LoadExampleData;
 import org.junit.Test;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +15,19 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
   @Test
   public void test() {
 
+    QContact con = QContact.alias();
+    QCustomer cus = QCustomer.alias();
+    QProduct pro = QProduct.alias();
+
     Customer customer =
-       Customer.find.where()
+        Customer.find.where()
+            // tuning
+            .select(cus.name, cus.registered)
+            .orders.fetchAll()
+            .orders.details.product.fetch(pro.name)
+            .contacts.fetch(con.firstName)
+            // predicates
             .id.eq(12)
-            .select("name, email")
             .findUnique();
   }
 
@@ -29,7 +37,7 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
 
     new QCustomer()
         .id.greaterThan(12)
-        .name.startsWith("asd")
+        .name.startsWith("Rob")
         .findList();
 
   }
@@ -39,36 +47,47 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
 
     LoadExampleData.load();
 
-    Country country = Ebean.getReference(Country.class, "NZ");
-    List<Customer> customers = new QCustomer()
-        .select("name")
-        .billingAddress.country.equalTo(country)
-        .orderBy()
-          .name.asc()
-        .findList();
+//    Ebean.find(Customer.class).where()
+//        .disjunction()
+//          .gt("id", 1)
+//          .conjunction()
+//            .icontains("name", "jim")
+//            .eq("inactive", false)
+//          .endJunction()
+//        .endJunction();
 
-    List<Customer> customers2 = new QCustomer()
-        .select("name")
-        .name.contains("asd")
-        .billingAddress.country.equalTo(country)
-        .order()
-          .name.asc()
-        .findList();
+    Country nz = Country.find.ref("NZ");
 
-    List<Customer> customers3
+    List<Customer> customers
         = new QCustomer()
-        .name.startsWith("Rob")
+        .billingAddress.city.equalTo("Auckland")
+        .name.istartsWith("Rob")
+        .version.between(1,100)
+        .billingAddress.country.equalTo(nz)
         .registered.before(new Date())
         .or()
           .id.greaterThan(1)
           .and()
-            .name.icontains("rob")
+            .name.icontains("Jim")
             .inactive.isTrue()
           .endAnd()
         .endOr()
+        .orderBy()
+          .name.asc()
+          .id.desc()
         .findList();
 
-    System.out.println();
+    //  where t1.city = ?
+    //   and lower(t0.name) like ? escape''
+    //   and t0.version between  ? and ?
+    //   and t1.country_code = ?
+    //   and t0.registered < ?
+    // and (t0.id > ?  or (lower(t0.name) like ? escape''  and t0.inactive = ? ) ) ;
+    //
+    // --bind(Auckland,rob%,1,100,NZ,2015-09-16 06:58:26.777,1,%jim%,true)
+
+
+    System.out.println(customers);
 
   }
 }
