@@ -1,13 +1,12 @@
 package org.example.domain;
 
-import com.avaje.ebean.Ebean;
 import org.example.ExampleBaseTestCase;
 import org.junit.Test;
 import org.example.service.LoadExampleData
 
 public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
 
-  Test
+  @Test
   fun test() {
 
     val customer =
@@ -18,7 +17,7 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
     System.out.println("name: ${customer?.name}");
   }
 
-  Test
+  @Test
   fun automaticallyAddJoins() {
 
     LoadExampleData().load()
@@ -33,14 +32,16 @@ public class ExamplePartialObjectQueryTest : ExampleBaseTestCase() {
           .eq("billingAddress.country", country)
         .findUnique();
 
-    val customerName = customer.name;
-    val countryName = customer.billingAddress?.country?.name;
+    if (customer != null) {
+      val customerName = customer.name;
+      val countryName = customer.billingAddress?.country?.name;
 
-    if (null == customer.billingAddress?.country?.name) {
-      System.out.println("got a null");
+      if (null == customer.billingAddress?.country?.name) {
+        System.out.println("got a null");
+      }
+
+      System.out.println("name: ${customer.name}  $customerName ... and ${customer.billingAddress?.country} $countryName");
     }
-
-    System.out.println("name: ${customer.name}  $customerName ... and ${customer.billingAddress?.country} $countryName");
 
   }
 }

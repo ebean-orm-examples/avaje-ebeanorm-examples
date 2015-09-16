@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 /**
  * Order entity bean.
  */
-Entity
-Table(name = "o_order")
+@Entity
+@Table(name = "o_order")
 public class Order : BaseModel() {
 
   companion object : Model.Find<Long, Order>() {}
@@ -34,14 +34,14 @@ public class Order : BaseModel() {
 
   public var shipDate: Date? = null;
 
-  ManyToOne NotNull
+  @ManyToOne @NotNull
   public var customer: Customer? = null;
 
-  ManyToOne
+  @ManyToOne
   public var shippingAddress: Address? = null;
 
-  OneToMany(mappedBy = "order", cascade = arrayOf(CascadeType.PERSIST))
-  OrderBy("id asc")
+  @OneToMany(mappedBy = "order", cascade = arrayOf(CascadeType.PERSIST))
+  @OrderBy("id asc")
   public var details: MutableList<OrderDetail> = ArrayList();
 
 

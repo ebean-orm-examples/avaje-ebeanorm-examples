@@ -4,7 +4,6 @@ import com.avaje.ebean.EbeanServer
 import com.google.inject.AbstractModule
 import org.example.extension.loggerFor
 import org.example.service.OrderService
-import kotlin.reflect.jvm.java
 
 /**
  *

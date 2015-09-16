@@ -1,5 +1,8 @@
 package org.example.service;
 
+import com.avaje.ebean.Ebean
+import com.avaje.ebean.EbeanServer
+import com.avaje.ebean.TxRunnable
 import java.util.ArrayList;
 
 import org.example.domain.Address;
@@ -11,9 +14,6 @@ import org.example.domain.Order.Status;
 import org.example.domain.OrderDetail;
 import org.example.domain.Product;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.EbeanServer;
-import com.avaje.ebean.TxRunnable;
 import java.util.Collections
 import java.util.LinkedHashSet
 
@@ -23,7 +23,7 @@ public class LoadExampleData {
 
   val server: EbeanServer = Ebean.getServer(null);
     
-  synchronized fun load() {
+  @synchronized fun load() {
 
     if (runOnce) {
       return;
@@ -43,11 +43,11 @@ public class LoadExampleData {
     Ebean.execute({
 
       // orm update use bean name and bean properties
-      server.createUpdate(javaClass<OrderDetail>(), "delete from orderDetail").execute();
-      server.createUpdate((javaClass<Order>()), "delete from order").execute();
-      server.createUpdate((javaClass<Contact>()), "delete from contact").execute();
-      server.createUpdate((javaClass<Customer>()), "delete from Customer").execute();
-      server.createUpdate((javaClass<Address>()), "delete from address").execute();
+      server.createUpdate(OrderDetail::class.java, "delete from orderDetail").execute();
+      server.createUpdate(Order::class.java, "delete from order").execute();
+      server.createUpdate(Contact::class.java, "delete from contact").execute();
+      server.createUpdate(Customer::class.java, "delete from Customer").execute();
+      server.createUpdate(Address::class.java, "delete from address").execute();
 
       // sql update uses table and column names
       server.createSqlUpdate("delete from o_country").execute();

@@ -8,7 +8,7 @@ import java.util.ArrayList
  */
 class SimpleTest {
 
-  Test
+  @Test
   fun simple() {
 
     var details: MutableList<OrderDetail> = ArrayList();

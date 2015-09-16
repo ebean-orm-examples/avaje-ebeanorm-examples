@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull
 /**
  * Order Detail entity bean.
  */
-Entity
-Table(name = "o_order_detail")
+@Entity
+@Table(name = "o_order_detail")
 public class OrderDetail() : BaseModel() {
 
   companion object : Model.Find<Long, Order>() {}
@@ -27,8 +27,8 @@ public class OrderDetail() : BaseModel() {
   /**
    * The owning order - should be not null really.
    */
-  NotNull
-  ManyToOne
+  @NotNull
+  @ManyToOne
   public var order: Order? = null;
 
   public var orderQty: Int? = null;
@@ -37,8 +37,8 @@ public class OrderDetail() : BaseModel() {
 
   public var unitPrice: Double? = null;
 
-  NotNull
-  ManyToOne
+  @NotNull
+  @ManyToOne
   public var product: Product? = null;
 
   /**

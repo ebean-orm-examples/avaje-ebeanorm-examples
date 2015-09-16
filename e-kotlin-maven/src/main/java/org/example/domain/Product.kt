@@ -10,14 +10,14 @@ import javax.validation.constraints.Size;
 /**
  * Product entity bean.
  */
-Entity
-Table(name = "o_product")
+@Entity
+@Table(name = "o_product")
 public class Product (
 
- NotNull Size(max = 20)
+ @NotNull @Size(max = 20)
  public var sku: String = "",
 
- NotNull Size(max = 100)
+ @NotNull @Size(max = 100)
  public var name: String = ""
 
 ) : BaseModel() {

@@ -4,16 +4,15 @@ import com.avaje.ebean.Ebean
 import org.avaje.agentloader.AgentLoader
 import org.example.ExampleBaseTestCase
 import org.junit.Test
-import kotlin.platform.platformStatic
 
 public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
 
-    platformStatic init {
-        // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
-        AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
-    }
+  init {
+    // load the enhancement agent 'early' prior to the bean classes like Customer being loaded
+    AgentLoader.loadAgentFromClasspath("avaje-ebeanorm-agent", "debug=1;packages=org.example.**")
+  }
 
-  Test
+  @Test
   fun testFindIterate() {
 
     // insert some customers
@@ -44,9 +43,14 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
         .select("id, name")
         .where()
         .findEachWhile {
-          System.out.println(" using findEachThat extension method ... ${it.id} ${it.name}")
+          System.out.println(" got ... ${it.id} ${it.name}")
           // stop iterating through the results if id > 5
-          (it.id ?: 0) > 5;
+
+          it?.comments!!.length() > 5
+          //it.contacts.size() > 5;
+          //var t :Long? = 42
+          //t!!.toLong() > 4L
+          it.id!!.toLong() > 5L
         }
 
 

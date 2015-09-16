@@ -8,7 +8,7 @@ import org.example.ExampleBaseTestCase
  */
 class LoadExampleDataTest : ExampleBaseTestCase() {
 
-  Test fun just_run_it() {
+  @Test fun just_run_it() {
 
     val load = LoadExampleData()
     load.load()

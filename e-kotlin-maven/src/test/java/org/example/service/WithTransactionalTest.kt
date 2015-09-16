@@ -4,15 +4,15 @@ import org.example.ExampleBaseTestCase
 import org.junit.Test
 import org.example.domain.Customer
 import org.junit.Assert
-import kotlin.test.assertNull
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 
 /**
  * Created by rob on 30/10/14.
  */
 class WithTransactionalTest : ExampleBaseTestCase() {
 
-  Test fun just_run_it() {
+  @Test fun just_run_it() {
 
     val load = WithTransactional()
     try {

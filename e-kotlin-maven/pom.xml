@@ -20,7 +20,7 @@
   <description>Example using Ebean in Kotlin via Maven plugin</description>
 
   <properties>
-    <kotlin.version>0.12.1218</kotlin.version>
+    <kotlin.version>0.13.1513</kotlin.version>
     <jetty.version>9.2.11.v20150529</jetty.version>
   </properties>
 
@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>[6.1.1]</version>
+      <version>[6.7.1]</version>
     </dependency>
 
     <!-- 

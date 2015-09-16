@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
  */
 class PlayWithAddressTest {
 
-    Test
+    @Test
     fun testFindAll() {
 
         val play = PlayWithAddress()
