@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>example-dbmigration</artifactId>
+  <version>1.1-SNAPSHOT</version>
+
+  <parent>
+    <groupId>org.avaje</groupId>
+    <artifactId>avaje-parent</artifactId>
+    <version>2.0</version>
+  </parent>
+  
+  <dependencies>
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm</artifactId>
+      <version>6.3.2-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.36</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4-1201-jdbc41</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>oracle</groupId>
+      <artifactId>oracle-jdbc</artifactId>
+      <version>7.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.avaje.composite</groupId>
+      <artifactId>avaje-composite-testing-ebean</artifactId>
+      <version>4.1</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+</project>

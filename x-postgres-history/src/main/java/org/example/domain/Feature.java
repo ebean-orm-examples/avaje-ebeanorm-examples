@@ -17,6 +17,8 @@ public class Feature extends BaseModel {
   @Size(max = 60)
   String name;
 
+  String notes;
+
   @ManyToMany
   @JoinTable(name = "customer_feature")
   List<Customer> customers;
@@ -45,5 +47,13 @@ public class Feature extends BaseModel {
 
   public void setCustomers(List<Customer> customers) {
     this.customers = customers;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
   }
 }

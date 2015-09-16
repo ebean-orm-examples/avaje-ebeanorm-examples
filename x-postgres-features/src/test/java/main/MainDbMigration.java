@@ -12,7 +12,7 @@ public class MainDbMigration {
   public static void main(String[] args) throws IOException {
 
     DbMigration dbMigration = new DbMigration();
-    dbMigration.runMigration();
+    dbMigration.generateMigration();
 
   }
 }

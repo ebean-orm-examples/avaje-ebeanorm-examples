@@ -1,5 +1,6 @@
 package main;
 
+import com.avaje.ebean.config.dbplatform.DbPlatformName;
 import com.avaje.ebean.dbmigration.DbMigration;
 
 import java.io.IOException;
@@ -11,7 +12,8 @@ public class MainDbMigration {
     DbMigration dbMigration = new DbMigration();
     //dbMigration.setPathToResources("src/main/resources");
 
-    dbMigration.runMigration();
+    //dbMigration.setPlatform(DbPlatformName.POSTGRES);
+    dbMigration.generateMigration();
 
   }
 }

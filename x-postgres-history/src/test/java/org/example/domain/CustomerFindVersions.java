@@ -2,6 +2,7 @@ package org.example.domain;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Transaction;
+import com.avaje.ebean.ValuePair;
 import com.avaje.ebean.Version;
 import org.avaje.ebeantest.LoggedSql;
 import org.junit.Ignore;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,6 +64,19 @@ public class CustomerFindVersions {
             .where()
             .idEq(21)
             .findVersionsBetween(start, end);
+
+    for (Version<Customer> customerVersion : customerVersions) {
+      Customer bean = customerVersion.getBean();
+      Map<String, ValuePair> diff = customerVersion.getDiff();
+      Timestamp effectiveStart = customerVersion.getStart();
+      Timestamp effectiveEnd = customerVersion.getEnd();
+
+      assertThat(bean).isNotNull();
+      assertThat(diff).isNotNull();
+      assertThat(effectiveStart).isNotNull();
+      //assertThat(effectiveEnd).isNotNull();
+    }
+
 
     List<String> loggedSql = LoggedSql.stop();
     assertThat(loggedSql).hasSize(1);
