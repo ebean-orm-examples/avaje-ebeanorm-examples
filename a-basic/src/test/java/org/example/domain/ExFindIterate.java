@@ -35,6 +35,7 @@ public class ExFindIterate extends ExampleBaseTestCase {
         // query tuning
         .select(cus.name, cus.inactive)
         .contacts.fetch(con.email, con.firstName)
+        .contacts.notes.fetchAll()
 
         // predicates
         .name.ilike("Rob")

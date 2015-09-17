@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import com.avaje.ebean.PagedList;
+import com.avaje.ebean.QueryEachConsumer;
 import org.example.ExampleBaseTestCase;
 import org.example.domain.query.QContact;
 import org.example.domain.query.QCustomer;
@@ -32,14 +34,31 @@ public class ExamplePartialObjectQueryTest extends ExampleBaseTestCase {
   }
 
   @Test
-  public void testDoo() {
+  public void testSimpleQuery() {
 
+    Country nz = Country.find.ref("NZ");
 
-    new QCustomer()
+    PagedList<Customer> pagedList = new QCustomer()
         .id.greaterThan(12)
-        .name.startsWith("Rob")
-        .findList();
+        .name.istartsWith("Rob")
+        .billingAddress.country.equalTo(nz)
+        .orderBy()
+        .name.desc()
+        .id.asc()
+        .findPagedList(0, 100);
 
+    pagedList.loadRowCount();
+    List<Customer> list = pagedList.getList();
+    int totalRowCount = pagedList.getTotalRowCount();
+
+//
+//    List<Customer> customers = new QCustomer()
+//        .id.greaterThan(12)
+//        .name.startsWith("Rob")
+//        .billingAddress.country.equalTo(nz)
+//        .orderBy()
+//          .name.asc()
+//        .findList();
   }
 
   @Test

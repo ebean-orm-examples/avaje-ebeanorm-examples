@@ -19,10 +19,7 @@ public class MainQueryBeanGenerator {
 
     config.setEntityBeanPackage("org.example.domain");
     //config.setDestPackage("org.example.domain.query");
-    //config.setMaxPathTraversalDepth(3);
-    //config.setAopStyle(false);
 
-    //config.setOverwriteExistingFinders(true);
 
     Generator generator = new Generator(config);
     generator.generateQueryBeans();
