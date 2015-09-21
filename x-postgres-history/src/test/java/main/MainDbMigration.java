@@ -1,6 +1,5 @@
 package main;
 
-import com.avaje.ebean.config.dbplatform.DbPlatformName;
 import com.avaje.ebean.dbmigration.DbMigration;
 
 import java.io.IOException;
