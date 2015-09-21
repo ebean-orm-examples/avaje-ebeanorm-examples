@@ -18,7 +18,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>6.7.1</version>
+      <version>6.8.1</version>
     </dependency>
 
     <!-- Used to test JsonNode mapping -->
@@ -26,6 +26,34 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.5.3</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>oracle</groupId>-->
+      <!--<artifactId>oracle-jdbc</artifactId>-->
+      <!--<version>7.0</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm-typequery</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+
+    <!-- Required if loading agent programmatically -->
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm-typequery-agent</artifactId>
+      <version>1.4.1</version>
+    </dependency>
+
+    <!-- Used to generate the query beans -->
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm-typequery-generator</artifactId>
+      <version>1.5.1</version>
+      <scope>test</scope>
     </dependency>
 
     <!-- 

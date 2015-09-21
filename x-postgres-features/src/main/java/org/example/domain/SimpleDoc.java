@@ -9,8 +9,6 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import java.util.Map;
 
-//import com.fasterxml.jackson.databind.JsonNode;
-
 @Entity
 @Table(name="p_doc")
 public class SimpleDoc extends Model {
@@ -26,7 +24,6 @@ public class SimpleDoc extends Model {
   String name;
 
   @DbJsonB
-  //@DbJson(storage = DbJsonType.JSONB)
   Map<String,Object> content;
 
   public Long getId() {

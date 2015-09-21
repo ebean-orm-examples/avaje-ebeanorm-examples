@@ -3,6 +3,7 @@ package org.example;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.text.json.EJson;
 import org.example.domain.SimpleDoc;
+import org.example.domain.query.QSimpleDoc;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class SimpleDocWithMapTest extends ExampleBaseTestCase {
   public void test() throws IOException {
 
 
-    String rawJson = "{\"docName\":\"rob doc\", \"docScore\":234, \"title\":\"Some title\"}";
+    String rawJson = "{\"docName\":\"rob doc\", \"path\":{\"inner\":\"so\", \"other\":34},\"docScore\":234, \"title\":\"Some title\"}";
 
     Map<String, Object> content = EJson.parseObject(rawJson);
 
@@ -31,18 +32,59 @@ public class SimpleDocWithMapTest extends ExampleBaseTestCase {
     doc.setContent(content);
 
     doc.save();
+//
+//    if (true) {
+//      return;
+//    }
 
-    SimpleDoc doc1 = SimpleDoc.find.byId(doc.getId());
 
-    assertEquals(doc1.getName(), doc.getName());
-    assertEquals("rob doc", doc1.getContent().get("docName"));
-
-    List<SimpleDoc> docs = SimpleDoc.find.where()
-        .raw("jsonbExists(content#>'{docName}', 'rob doc')")
-        //.raw("content#>'{docName}' ? 'rob doc'")
+    List<SimpleDoc> title = new QSimpleDoc()
+        //.id.lessOrEqualTo(12L)
+        .content.jsonExists("title")
+        .content.jsonEqualTo("title", "Some title")
+        .content.jsonGreaterOrEqual("path.other", 34)
         .findList();
 
-    assertTrue(!docs.isEmpty());
+    System.out.println(title);
+
+//    if (true) {
+//      return;
+//    }
+
+
+    List<SimpleDoc> list = new QSimpleDoc().query()
+        .where().jsonEqualTo("content", "title", "Some title")
+        .jsonEqualTo("content", "path.other", 34)
+        .jsonExists("content", "path.other")
+        .jsonGreaterOrEqual("content", "path.other", 34)
+        .jsonGreaterThan("content", "path.other", 30)
+        .findList();
+
+    System.out.println(list);
+
+//    List<SimpleDoc> list = new QSimpleDoc()
+//        .raw("jsonbExists(content #> '{docName}', 'rob doc')")
+//        .findList();
+//
+//    List<SimpleDoc> list2 = new QSimpleDoc()
+//        .raw("jsonbExists(content #> '{path,inner}', 'so')")
+//        .findList();
+//
+//    List<SimpleDoc> list3 = new QSimpleDoc()
+//        .raw("jsonbExists(content #> '{path,other}', '34')")
+//        .findList();
+//
+//    SimpleDoc doc1 = SimpleDoc.find.byId(doc.getId());
+//
+//    assertEquals(doc1.getName(), doc.getName());
+//    assertEquals("rob doc", doc1.getContent().get("docName"));
+//
+//    List<SimpleDoc> docs = SimpleDoc.find.where()
+//        .raw("jsonbExists(content#>'{docName}', 'rob doc')")
+//        //.raw("content#>'{docName}' ? 'rob doc'")
+//        .findList();
+//
+//    assertTrue(!docs.isEmpty());
 
   }
 
