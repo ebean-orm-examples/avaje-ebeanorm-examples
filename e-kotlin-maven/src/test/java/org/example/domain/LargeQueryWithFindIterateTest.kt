@@ -46,7 +46,7 @@ public class LargeQueryWithFindIterateTest : ExampleBaseTestCase() {
           System.out.println(" got ... ${it.id} ${it.name}")
           // stop iterating through the results if id > 5
 
-          it?.comments!!.length() > 5
+          it?.comments!!.length > 5
           //it.contacts.size() > 5;
           //var t :Long? = 42
           //t!!.toLong() > 4L

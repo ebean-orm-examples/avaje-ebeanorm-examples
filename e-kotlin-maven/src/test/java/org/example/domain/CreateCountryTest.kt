@@ -8,6 +8,17 @@ class CreateCountryTest : ExampleBaseTestCase() {
 
   @Test fun doInsert() {
 
+//      val defaultServer = Ebean.getDefaultServer()
+
+//      val nzl = QCountry()
+//              .code.equalTo("NZ")
+//              .findUnique();
+//
+//      assertNull(nzl);
+//
+//      var cust = Customer()
+//      var size = cust.contacts.size;
+
     var sa = Country(code = "SA", name = "South Af");
     sa.save();
 
@@ -15,7 +26,7 @@ class CreateCountryTest : ExampleBaseTestCase() {
     //sa.save();
 
     val mutableList = Country.all();
-    mutableList.size();
+    mutableList.size;
 
     //Country.db().save(null);
 
@@ -32,7 +43,7 @@ class CreateCountryTest : ExampleBaseTestCase() {
     val nzC = Ebean.find(Country::class.java, "NZ")
     nzC?.name = "something"
 
-    ebeanServer.find(Country.javaClass, "NZ");
+    ebeanServer.find(Country::class.java, "NZ");
 
 
     val nzUni = Country.where().findUnique()

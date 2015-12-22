@@ -40,14 +40,5 @@ public class Contact() : BaseModel() {
     this.lastName = lastName;
   }
 
-  companion object : Model.Find<Long, Contact>() {
-
-    /**
-     * Alternate to secondary constructor ...
-     */
-    fun of(first: String, last: String): Contact {
-      return Contact(first, last);
-    }
-
-  }
+  companion object : Model.Find<Long, Contact>() {}
 }
