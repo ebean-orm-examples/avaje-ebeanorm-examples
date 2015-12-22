@@ -38,14 +38,14 @@ public class SimpleDocWithMapTest extends ExampleBaseTestCase {
 //    }
 
 
-    List<SimpleDoc> title = new QSimpleDoc()
-        //.id.lessOrEqualTo(12L)
-        .content.jsonExists("title")
-        .content.jsonEqualTo("title", "Some title")
-        .content.jsonGreaterOrEqual("path.other", 34)
-        .findList();
-
-    System.out.println(title);
+//    List<SimpleDoc> title = new QSimpleDoc()
+//        //.id.lessOrEqualTo(12L)
+//        .content.jsonExists("title")
+//        .content.jsonEqualTo("title", "Some title")
+//        .content.jsonGreaterOrEqual("path.other", 34)
+//        .findList();
+//
+//    System.out.println(title);
 
 //    if (true) {
 //      return;
@@ -54,6 +54,7 @@ public class SimpleDocWithMapTest extends ExampleBaseTestCase {
 
     List<SimpleDoc> list = new QSimpleDoc().query()
         .where().jsonEqualTo("content", "title", "Some title")
+        .jsonBetween("content", "path.other", 30, 34)
         .jsonEqualTo("content", "path.other", 34)
         .jsonExists("content", "path.other")
         .jsonGreaterOrEqual("content", "path.other", 34)

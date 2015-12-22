@@ -18,7 +18,7 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>6.8.1</version>
+      <version>6.13.5</version>
     </dependency>
 
     <!-- Used to test JsonNode mapping -->
@@ -37,23 +37,23 @@
 
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
-      <artifactId>avaje-ebeanorm-typequery</artifactId>
-      <version>1.5.1</version>
+      <artifactId>avaje-ebeanorm-querybean</artifactId>
+      <version>2.1.1</version>
     </dependency>
 
     <!-- Required if loading agent programmatically -->
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
-      <artifactId>avaje-ebeanorm-typequery-agent</artifactId>
-      <version>1.4.1</version>
+      <artifactId>querybean-agent</artifactId>
+      <version>2.1.1</version>
     </dependency>
 
     <!-- Used to generate the query beans -->
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
-      <artifactId>avaje-ebeanorm-typequery-generator</artifactId>
-      <version>1.5.1</version>
-      <scope>test</scope>
+      <artifactId>querybean-generator</artifactId>
+      <version>2.1.2</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- 
@@ -88,7 +88,7 @@
       <plugin>
         <groupId>org.avaje.ebeanorm</groupId>
         <artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
-        <version>4.5.4</version>
+        <version>4.8.1</version>
         <executions>
            <execution>
             <id>main</id>
