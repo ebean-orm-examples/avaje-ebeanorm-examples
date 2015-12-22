@@ -53,7 +53,7 @@ public class Order extends BaseModel {
   
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
   @OrderBy("id asc")
-  List<OrderDetail> details;
+  List<OrderDetail> details = new ArrayList<>();
 
   public String toString() {
     return id + " status:" + status + " customer:" + customer;
