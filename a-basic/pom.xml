@@ -13,9 +13,15 @@
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
       <artifactId>avaje-ebeanorm</artifactId>
-      <version>6.13.5</version>
+      <version>6.16.1</version>
     </dependency>
 
+    <!--<dependency>-->
+      <!--<groupId>org.avaje.ebeanorm</groupId>-->
+      <!--<artifactId>ebeanorm-seed-jxl</artifactId>-->
+      <!--<version>1.1.1-SNAPSHOT</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
 
     <!-- Generate query beans (java annotation processor) -->
     <dependency>
@@ -131,7 +137,7 @@
       <plugin>
         <groupId>org.avaje.ebeanorm</groupId>
         <artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
-        <version>4.8.1</version>
+        <version>4.9.1</version>
         <executions>
            <execution>
             <id>main</id>
